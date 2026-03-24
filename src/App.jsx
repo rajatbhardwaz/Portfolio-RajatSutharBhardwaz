@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import WhatIDo from "./components/WhatIDo";
 import Projects from "./components/Projects";
+import TechArsenal from "./components/TechArsenal";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import CursorFollower from "./components/CursorFollower";
@@ -22,6 +23,10 @@ export default function App() {
         <div className="section-divider" />
 
         <Projects />
+
+        <div className="section-divider" />
+
+        <TechArsenal />
 
         <div className="section-divider" />
 

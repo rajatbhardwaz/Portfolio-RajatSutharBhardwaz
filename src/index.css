@@ -236,113 +236,448 @@ body {
   }
 }
 
-/* ───────────────── Project card ──────────────────────────────────── */
-.project-card {
-  background-color: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 14px 14px 20px;
-  transition:
-    transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
-    box-shadow 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
-    border-color 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
+/* ═══════════════════════════════════════════════════════════════════
+   ACCORDION STRIP — Netflix-style expanding cards
+   ═══════════════════════════════════════════════════════════════════ */
 
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* ─── Projects showcase layout ─── */
-.projects-showcase {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+/* The horizontal strip container */
+.accordion-strip {
+  display: flex;
+  align-items: center;
+  height: 480px;
+  gap: 6px;
+  border-radius: 4px;
+  overflow: visible;
+  padding: 30px 0;
 }
 
 @media (min-width: 768px) {
-  .projects-showcase {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
+  .accordion-strip {
+    height: 520px;
+    gap: 8px;
   }
 }
 
-/* ─── Featured card (Vaytro) ─── */
-.project-card--featured {
-  padding: 14px 14px 24px;
+@media (min-width: 1024px) {
+  .accordion-strip {
+    height: 560px;
+  }
 }
 
-.project-card__image-wrap--featured {
+/* ─── Individual card ─── */
+.accordion-card {
+  position: relative;
+  min-width: 0;
   overflow: hidden;
-  border-radius: 8px;
-  aspect-ratio: 9 / 14;
-  margin-bottom: 1.25rem;
+  border-radius: 4px;
+  align-self: center;
+  transition:
+    flex 0.7s cubic-bezier(0.72, 0, 0.28, 1),
+    transform 0.7s cubic-bezier(0.72, 0, 0.28, 1);
 }
 
-/* ─── Multi-image card (Portfolio) ─── */
-.project-card--multi {
-  padding: 20px 14px 14px;
+/* Overlay gradient — bottom-up for legibility */
+.accordion-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Collapsed state — vertical title ─── */
+.accordion-card__collapsed {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(0.72, 0, 0.28, 1);
 }
 
-.project-card__gallery {
+.accordion-card--active .accordion-card__collapsed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.accordion-card__number {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.accordion-card__vertical-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+/* ─── Expanded state — full content ─── */
+.accordion-card__expanded {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.72, 0, 0.28, 1) 0.15s;
+  pointer-events: none;
+}
+
+.accordion-card--active .accordion-card__expanded {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.accordion-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.accordion-card__category {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+}
+
+.accordion-card__idx {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.accordion-card__bottom {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.project-card__gallery-item {
-  overflow: hidden;
-  border-radius: 8px;
-  aspect-ratio: 16 / 10;
-}
-
-/* Image container */
-.project-card__image-wrap {
-  overflow: hidden;
-  border-radius: 8px;
-  aspect-ratio: 16 / 9;
-  margin-bottom: 1rem;
-}
-
-.project-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Info */
-.project-card__info {
-  padding: 0 4px;
-}
-
-.project-card__label {
-  display: block;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-gray-600);
-  margin-bottom: 0.5rem;
-}
-
-.project-card__title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.accordion-card__title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   color: var(--color-white);
-  margin-bottom: 0.35rem;
 }
 
-.project-card__desc {
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: var(--color-gray-500);
+.accordion-card__line {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 1px;
+  transition: width 0.5s ease;
+}
+
+.accordion-card--active .accordion-card__line {
+  width: 60px;
+}
+
+/* ─── Mobile: stack vertically instead ─── */
+@media (max-width: 639px) {
+  .accordion-strip {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .accordion-card {
+    height: 80px;
+    flex: none !important;
+    transition: height 0.6s cubic-bezier(0.72, 0, 0.28, 1);
+  }
+
+  .accordion-card--active {
+    height: 320px;
+  }
+
+  .accordion-card__collapsed {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0 1.25rem;
+  }
+
+  .accordion-card__vertical-title {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TECH ARSENAL — Rico Slider horizontal cascade
+   ═══════════════════════════════════════════════════════════════════ */
+
+.tech-section {
+  padding-top: clamp(7.5rem, 12vw, 10rem);
+  padding-bottom: clamp(7.5rem, 12vw, 10rem);
+  overflow: hidden;
+}
+
+/* ─── Slider Nav (arrows + counter in header) ─── */
+.slider-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.slider-nav__counter {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.slider-nav__sep {
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 0.15rem;
+}
+
+.slider-nav__btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.slider-nav__btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.slider-nav__btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+/* ─── Slider viewport (overflow mask) ─── */
+.slider-viewport {
+  width: 100%;
+  overflow: hidden;
+  margin-top: clamp(2.5rem, 4vw, 4rem);
+  cursor: grab;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 4%,
+    black 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 4%,
+    black 96%,
+    transparent 100%
+  );
+}
+
+/* ─── Infinite marquee track ─── */
+.marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  padding: 1rem 0;
+  animation: marquee-scroll linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Translate by exactly half (one full set of 12 cards) */
+    transform: translateX(calc(-50% - 8px));
+  }
+}
+
+/* ─── Individual Volumen card (now flex item, not absolute) ─── */
+.vol-card {
+  width: 280px;
+  height: 420px;
+  flex-shrink: 0;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition:
+    box-shadow 0.5s cubic-bezier(0.72, 0, 0.28, 1),
+    border-color 0.4s ease;
+}
+
+.vol-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+/* Card header — brand + edition */
+.vol-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.vol-card__brand {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.vol-card__edition {
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Thin divider line */
+.vol-card__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0.75rem 0;
+}
+
+/* Index number */
+.vol-card__index {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.15);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.75rem;
+}
+
+/* Body — two-column layout */
+.vol-card__body {
+  display: flex;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+/* Left column — large abbreviation */
+.vol-card__left {
+  display: flex;
+  align-items: flex-start;
+}
+
+.vol-card__abbr {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: var(--color-white);
+}
+
+/* Right column — meta + details */
+.vol-card__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding-top: 0.35rem;
+}
+
+.vol-card__meta {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.vol-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.vol-card__detail {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.4;
+}
+
+/* Large title at bottom */
+.vol-card__title-area {
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.vol-card__title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--color-white);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .slider-nav {
+    gap: 0.5rem;
+  }
+
+  .slider-nav__btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .vol-card {
+    width: 240px;
+    height: 360px;
+    padding: 1.25rem 1rem;
+  }
+
+  .vol-card__abbr {
+    font-size: 2.5rem;
+  }
+
+  .vol-card__title {
+    font-size: 1.75rem;
+  }
 }
 
 /* ───────────────── Service card ──────────────────────────────────── */

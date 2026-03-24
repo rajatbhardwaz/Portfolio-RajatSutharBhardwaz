@@ -4,118 +4,30 @@ import { useRef, useState } from "react";
 const smoothEase = [0.25, 0.1, 0.25, 1];
 const revealEase = [0.16, 1, 0.3, 1];
 
-const cardVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: smoothEase },
-  },
-};
+/*
+ * Each card has unique dimensions to create an organic, staggered layout.
+ * flexBasis = resting width proportion,
+ * height    = card height (varies ±),
+ * offsetY   = vertical shift for stagger
+ */
+const projects = [
+  { id: 1, title: "Booqup",               category: "Web App",     flexBasis: 1.1,  height: "92%",  offsetY: 12  },
+  { id: 2, title: "Vaytro",               category: "App Design",  flexBasis: 0.85, height: "100%", offsetY: -8  },
+  { id: 3, title: "AIOS",                 category: "AI Platform", flexBasis: 1.2,  height: "88%",  offsetY: 20  },
+  { id: 4, title: "Wildo",                category: "Creative",    flexBasis: 0.9,  height: "96%",  offsetY: -14 },
+  { id: 5, title: "AI Surveillance CCTV", category: "AI / IoT",    flexBasis: 1.0,  height: "90%",  offsetY: 8   },
+  { id: 6, title: "Smarth Sathi",         category: "Mobile App",  flexBasis: 0.95, height: "98%",  offsetY: -4  },
+];
 
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.2 } },
-};
-
-/* ─── Vaytro — featured single-image project ─── */
-function VaytroCard() {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <motion.div
-      id="project-vaytro"
-      variants={cardVariant}
-      className="project-card project-card--featured"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      data-cursor-hover
-    >
-      <div className="project-card__image-wrap project-card__image-wrap--featured">
-        <motion.img
-          src="https://i.pinimg.com/736x/e8/14/50/e814504c5b73be7dfa6e5be8f5d72643.jpg"
-          alt="Vaytro — App Design"
-          animate={{
-            scale: hovered ? 1.03 : 1,
-            filter: hovered ? "brightness(1.1)" : "brightness(1)",
-          }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="project-card__image"
-        />
-      </div>
-
-      <div className="project-card__info">
-        <span className="project-card__label">01 — App Design</span>
-        <h3 className="project-card__title">Vaytro</h3>
-        <p className="project-card__desc">
-          A beautifully crafted travel app concept with immersive visuals and
-          modern UI patterns.
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─── Portfolio & More — vertical multi-image showcase ─── */
-function PortfolioCard() {
-  const [hovered, setHovered] = useState(false);
-
-  const images = [
-    {
-      src: "https://i.pinimg.com/736x/c6/da/45/c6da451a188e9fbc2e77fd822b8e5f56.jpg",
-      alt: "Portfolio — Bazil Awwwards Design",
-    },
-    {
-      src: "https://i.pinimg.com/736x/cb/fd/55/cbfd55ffbd0e2b086c3f77e4559852c5.jpg",
-      alt: "Portfolio — Web Design Concept",
-    },
-    {
-      src: "https://i.pinimg.com/736x/c1/f7/98/c1f79813c7da4f6371459f78e87f07b1.jpg",
-      alt: "Portfolio — Graphic Design Portfolio 2024",
-    },
-  ];
-
-  return (
-    <motion.div
-      id="project-portfolio"
-      variants={cardVariant}
-      className="project-card project-card--multi"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      data-cursor-hover
-    >
-      <div className="project-card__info">
-        <span className="project-card__label">02 — Portfolio & More</span>
-        <h3 className="project-card__title">Portfolio & Many Others</h3>
-        <p className="project-card__desc">
-          A curated collection of portfolio designs, web concepts, and creative
-          explorations.
-        </p>
-      </div>
-
-      <div className="project-card__gallery">
-        {images.map((img, i) => (
-          <div key={i} className="project-card__gallery-item">
-            <motion.img
-              src={img.src}
-              alt={img.alt}
-              animate={{
-                scale: hovered ? 1.02 : 1,
-                filter: hovered ? "brightness(1.08)" : "brightness(1)",
-              }}
-              transition={{
-                duration: 0.6,
-                delay: i * 0.05,
-                ease: "easeInOut",
-              }}
-              className="project-card__image"
-            />
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
+/* Unique gradient for each card */
+const cardGradients = [
+  "linear-gradient(160deg, #0f2027 0%, #203a43 40%, #2c5364 100%)",
+  "linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+  "linear-gradient(160deg, #0d1117 0%, #161b22 50%, #1f2937 100%)",
+  "linear-gradient(160deg, #1b1b2f 0%, #2d1b4e 50%, #462a6f 100%)",
+  "linear-gradient(160deg, #0c0c1d 0%, #1a1a3e 50%, #2a2a5e 100%)",
+  "linear-gradient(160deg, #1a1c20 0%, #2d3436 50%, #3d4148 100%)",
+];
 
 export default function Projects() {
   const sectionRef = useRef(null);
@@ -123,6 +35,8 @@ export default function Projects() {
 
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true, margin: "-80px" });
+
+  const [hoveredId, setHoveredId] = useState(null);
 
   return (
     <section
@@ -162,19 +76,67 @@ export default function Projects() {
           className="card-section__count"
         >
           <span className="dot dot-green" />
-          02
+          {String(projects.length).padStart(2, "0")}
         </motion.span>
       </div>
 
-      {/* Projects layout */}
+      {/* Accordion cards */}
       <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="projects-showcase"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.1, ease: smoothEase }}
+        className="accordion-strip"
       >
-        <VaytroCard />
-        <PortfolioCard />
+        {projects.map((project, index) => {
+          const isActive = hoveredId === project.id;
+          const hasHover = hoveredId !== null;
+
+          return (
+            <div
+              key={project.id}
+              className={`accordion-card ${isActive ? "accordion-card--active" : ""} ${hasHover && !isActive ? "accordion-card--inactive" : ""}`}
+              style={{
+                background: cardGradients[index],
+                flex: isActive ? 4 : hasHover && !isActive ? project.flexBasis * 0.6 : project.flexBasis,
+                height: project.height,
+                transform: `translateY(${project.offsetY}px)`,
+              }}
+              onMouseEnter={() => setHoveredId(project.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              data-cursor-hover
+            >
+              {/* Collapsed state — vertical title */}
+              <div className="accordion-card__collapsed">
+                <span className="accordion-card__number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="accordion-card__vertical-title">
+                  {project.title}
+                </span>
+              </div>
+
+              {/* Expanded state — full content */}
+              <div className="accordion-card__expanded">
+                <div className="accordion-card__top">
+                  <span className="accordion-card__category">
+                    {project.category}
+                  </span>
+                  <span className="accordion-card__idx">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <div className="accordion-card__bottom">
+                  <h3 className="accordion-card__title">{project.title}</h3>
+                  <div className="accordion-card__line" />
+                </div>
+              </div>
+
+              {/* Subtle overlay gradient */}
+              <div className="accordion-card__overlay" />
+            </div>
+          );
+        })}
       </motion.div>
     </section>
   );
