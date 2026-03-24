@@ -102,6 +102,9 @@ export default function Projects() {
                 height: project.height,
                 transform: `translateY(${project.offsetY}px)`,
               }}
+              onTouchStart={() => {
+                touchRef.current = true;
+              }}
               onMouseEnter={() => {
                 if (!touchRef.current) setHoveredId(project.id);
               }}
@@ -109,9 +112,9 @@ export default function Projects() {
                 if (!touchRef.current) setHoveredId(null);
               }}
               onClick={() => {
-                touchRef.current = true;
-                setHoveredId(hoveredId === project.id ? null : project.id);
-                setTimeout(() => { touchRef.current = false; }, 300);
+                if (touchRef.current) {
+                  setHoveredId((prev) => prev === project.id ? null : project.id);
+                }
               }}
               data-cursor-hover
             >
