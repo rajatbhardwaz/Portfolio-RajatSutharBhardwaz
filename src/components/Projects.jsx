@@ -37,6 +37,7 @@ export default function Projects() {
   const headingInView = useInView(headingRef, { once: true, margin: "-80px" });
 
   const [hoveredId, setHoveredId] = useState(null);
+  const touchRef = useRef(false);
 
   return (
     <section
@@ -101,9 +102,17 @@ export default function Projects() {
                 height: project.height,
                 transform: `translateY(${project.offsetY}px)`,
               }}
-              onMouseEnter={() => setHoveredId(project.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              onClick={() => setHoveredId(hoveredId === project.id ? null : project.id)}
+              onMouseEnter={() => {
+                if (!touchRef.current) setHoveredId(project.id);
+              }}
+              onMouseLeave={() => {
+                if (!touchRef.current) setHoveredId(null);
+              }}
+              onClick={() => {
+                touchRef.current = true;
+                setHoveredId(hoveredId === project.id ? null : project.id);
+                setTimeout(() => { touchRef.current = false; }, 300);
+              }}
               data-cursor-hover
             >
               {/* Collapsed state — vertical title */}
