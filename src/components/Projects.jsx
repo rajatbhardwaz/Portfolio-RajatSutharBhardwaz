@@ -4,56 +4,6 @@ import { useRef, useState } from "react";
 const smoothEase = [0.25, 0.1, 0.25, 1];
 const revealEase = [0.16, 1, 0.3, 1];
 
-const projects = [
-  {
-    id: "01",
-    title: "Booqup",
-    category: "Web App",
-    description: "Smart appointment booking system for modern businesses.",
-    image: "/images/booqup.png",
-  },
-  {
-    id: "02",
-    title: "Salon Demo",
-    category: "Website",
-    description: "Premium demo website for a luxury salon brand.",
-    image: "/images/salon.png",
-  },
-  {
-    id: "03",
-    title: "Modern Landing",
-    category: "UI Design",
-    description: "Bold, typography-focused landing page design.",
-    image: "/images/landing.png",
-  },
-  {
-    id: "04",
-    title: "E-Commerce Dashboard",
-    category: "Web App",
-    description: "Full-featured admin panel for online store management.",
-    image: "/images/ecommerce.png",
-  },
-  {
-    id: "05",
-    title: "Fitness Tracker",
-    category: "App Design",
-    description: "Health & workout tracking app with progress insights.",
-    image: "/images/fitness.png",
-  },
-  {
-    id: "06",
-    title: "3D Configurator",
-    category: "Creative Dev",
-    description: "Interactive product configurator with real-time 3D.",
-    image: "/images/configurator.png",
-  },
-];
-
-const gridContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
 const cardVariant = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -63,23 +13,28 @@ const cardVariant = {
   },
 };
 
-function ProjectCard({ project }) {
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.2 } },
+};
+
+/* ─── Vaytro — featured single-image project ─── */
+function VaytroCard() {
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      id={`project-${project.id}`}
+      id="project-vaytro"
       variants={cardVariant}
-      className="project-card"
+      className="project-card project-card--featured"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       data-cursor-hover
     >
-      {/* Image */}
-      <div className="project-card__image-wrap">
+      <div className="project-card__image-wrap project-card__image-wrap--featured">
         <motion.img
-          src={project.image}
-          alt={project.title}
+          src="https://i.pinimg.com/736x/e8/14/50/e814504c5b73be7dfa6e5be8f5d72643.jpg"
+          alt="Vaytro — App Design"
           animate={{
             scale: hovered ? 1.03 : 1,
             filter: hovered ? "brightness(1.1)" : "brightness(1)",
@@ -89,13 +44,74 @@ function ProjectCard({ project }) {
         />
       </div>
 
-      {/* Info */}
       <div className="project-card__info">
-        <span className="project-card__label">
-          {project.id} — {project.category}
-        </span>
-        <h3 className="project-card__title">{project.title}</h3>
-        <p className="project-card__desc">{project.description}</p>
+        <span className="project-card__label">01 — App Design</span>
+        <h3 className="project-card__title">Vaytro</h3>
+        <p className="project-card__desc">
+          A beautifully crafted travel app concept with immersive visuals and
+          modern UI patterns.
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Portfolio & More — vertical multi-image showcase ─── */
+function PortfolioCard() {
+  const [hovered, setHovered] = useState(false);
+
+  const images = [
+    {
+      src: "https://i.pinimg.com/736x/c6/da/45/c6da451a188e9fbc2e77fd822b8e5f56.jpg",
+      alt: "Portfolio — Bazil Awwwards Design",
+    },
+    {
+      src: "https://i.pinimg.com/736x/cb/fd/55/cbfd55ffbd0e2b086c3f77e4559852c5.jpg",
+      alt: "Portfolio — Web Design Concept",
+    },
+    {
+      src: "https://i.pinimg.com/736x/c1/f7/98/c1f79813c7da4f6371459f78e87f07b1.jpg",
+      alt: "Portfolio — Graphic Design Portfolio 2024",
+    },
+  ];
+
+  return (
+    <motion.div
+      id="project-portfolio"
+      variants={cardVariant}
+      className="project-card project-card--multi"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      data-cursor-hover
+    >
+      <div className="project-card__info">
+        <span className="project-card__label">02 — Portfolio & More</span>
+        <h3 className="project-card__title">Portfolio & Many Others</h3>
+        <p className="project-card__desc">
+          A curated collection of portfolio designs, web concepts, and creative
+          explorations.
+        </p>
+      </div>
+
+      <div className="project-card__gallery">
+        {images.map((img, i) => (
+          <div key={i} className="project-card__gallery-item">
+            <motion.img
+              src={img.src}
+              alt={img.alt}
+              animate={{
+                scale: hovered ? 1.02 : 1,
+                filter: hovered ? "brightness(1.08)" : "brightness(1)",
+              }}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.05,
+                ease: "easeInOut",
+              }}
+              className="project-card__image"
+            />
+          </div>
+        ))}
       </div>
     </motion.div>
   );
@@ -146,20 +162,19 @@ export default function Projects() {
           className="card-section__count"
         >
           <span className="dot dot-green" />
-          {String(projects.length).padStart(2, "0")}
+          02
         </motion.span>
       </div>
 
-      {/* Grid */}
+      {/* Projects layout */}
       <motion.div
-        variants={gridContainer}
+        variants={staggerContainer}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="card-grid"
+        className="projects-showcase"
       >
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+        <VaytroCard />
+        <PortfolioCard />
       </motion.div>
     </section>
   );
