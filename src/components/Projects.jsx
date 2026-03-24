@@ -11,22 +11,22 @@ const revealEase = [0.16, 1, 0.3, 1];
  * offsetY   = vertical shift for stagger
  */
 const projects = [
-  { id: 1, title: "Booqup",               category: "Web App",     flexBasis: 1.1,  height: "92%",  offsetY: 12  },
-  { id: 2, title: "Vaytro",               category: "App Design",  flexBasis: 0.85, height: "100%", offsetY: -8  },
-  { id: 3, title: "AIOS",                 category: "AI Platform", flexBasis: 1.2,  height: "88%",  offsetY: 20  },
-  { id: 4, title: "Wildo",                category: "Creative",    flexBasis: 0.9,  height: "96%",  offsetY: -14 },
-  { id: 5, title: "AI Surveillance CCTV", category: "AI / IoT",    flexBasis: 1.0,  height: "90%",  offsetY: 8   },
-  { id: 6, title: "Smarth Sathi",         category: "Mobile App",  flexBasis: 0.95, height: "98%",  offsetY: -4  },
+  { id: 1, title: "Booqup", category: "Web App", flexBasis: 1.1, height: "92%", offsetY: 12 },
+  { id: 2, title: "Vaytro", category: "App Design", flexBasis: 0.85, height: "100%", offsetY: -8 },
+  { id: 3, title: "AIOS", category: "AI Platform", flexBasis: 1.2, height: "88%", offsetY: 20 },
+  { id: 4, title: "Wildo", category: "Creative", flexBasis: 0.9, height: "96%", offsetY: -14 },
+  { id: 5, title: "AI Surveillance CCTV", category: "AI / IoT", flexBasis: 1.0, height: "90%", offsetY: 8 },
+  { id: 6, title: "Smarth Sathi", category: "Mobile App", flexBasis: 0.95, height: "98%", offsetY: -4 },
 ];
 
-/* Unique gradient for each card */
+/* Unique color for each card */
 const cardGradients = [
-  "linear-gradient(160deg, #0f2027 0%, #203a43 40%, #2c5364 100%)",
-  "linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-  "linear-gradient(160deg, #0d1117 0%, #161b22 50%, #1f2937 100%)",
-  "linear-gradient(160deg, #1b1b2f 0%, #2d1b4e 50%, #462a6f 100%)",
-  "linear-gradient(160deg, #0c0c1d 0%, #1a1a3e 50%, #2a2a5e 100%)",
-  "linear-gradient(160deg, #1a1c20 0%, #2d3436 50%, #3d4148 100%)",
+  "linear-gradient(160deg, #1a6fe8 0%, #2b7fff 50%, #4a9aff 100%)",   /* Blue       */
+  "linear-gradient(160deg, #e67e22 0%, #f39c12 50%, #f5ab35 100%)",   /* Orange     */
+  "linear-gradient(160deg, #e8e0d0 0%, #f5f0e8 50%, #faf7f2 100%)",   /* Ivory White*/
+  "linear-gradient(160deg, #d63031 0%, #e74c3c 50%, #ff6b6b 100%)",   /* Red        */
+  "linear-gradient(160deg, #6c3ec1 0%, #8e44cf 50%, #a855f7 100%)",   /* Purple     */
+  "linear-gradient(160deg, #0d9f6e 0%, #10b981 50%, #34d399 100%)",   /* Green      */
 ];
 
 export default function Projects() {
@@ -81,6 +81,8 @@ export default function Projects() {
         </motion.span>
       </div>
 
+      <p className="card-section__hint">Click or hover on these cards</p>
+
       {/* Accordion cards */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -97,33 +99,30 @@ export default function Projects() {
               key={project.id}
               className={`accordion-card ${isActive ? "accordion-card--active" : ""} ${hasHover && !isActive ? "accordion-card--inactive" : ""}`}
               style={{
-                background: cardGradients[index],
                 flex: isActive ? 4 : hasHover && !isActive ? project.flexBasis * 0.6 : project.flexBasis,
                 height: project.height,
                 transform: `translateY(${project.offsetY}px)`,
               }}
-              onTouchStart={() => {
-                touchRef.current = true;
-              }}
               onMouseEnter={() => {
-                if (!touchRef.current) setHoveredId(project.id);
+                if (window.matchMedia("(min-width: 769px)").matches) {
+                  setHoveredId(project.id);
+                }
               }}
               onMouseLeave={() => {
-                if (!touchRef.current) setHoveredId(null);
+                if (window.matchMedia("(min-width: 769px)").matches) {
+                  setHoveredId(null);
+                }
               }}
               onClick={() => {
-                if (touchRef.current) {
+                if (window.matchMedia("(max-width: 768px)").matches) {
                   setHoveredId((prev) => prev === project.id ? null : project.id);
                 }
               }}
               data-cursor-hover
             >
-              {/* Collapsed state — vertical title */}
+              {/* Default state — big vertical label */}
               <div className="accordion-card__collapsed">
-                <span className="accordion-card__number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="accordion-card__vertical-title">
+                <span className="accordion-card__big-label">
                   {project.title}
                 </span>
               </div>
@@ -144,9 +143,6 @@ export default function Projects() {
                   <div className="accordion-card__line" />
                 </div>
               </div>
-
-              {/* Subtle overlay gradient */}
-              <div className="accordion-card__overlay" />
             </div>
           );
         })}

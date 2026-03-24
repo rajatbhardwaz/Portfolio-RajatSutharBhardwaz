@@ -215,6 +215,15 @@ body {
   }
 }
 
+.card-section__hint {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.04em;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
 /* ───────────────── Responsive card grid ─────────────────────────── */
 .card-grid {
   display: grid;
@@ -244,7 +253,7 @@ body {
 .accordion-strip {
   display: flex;
   align-items: center;
-  height: 480px;
+  height: 580px;
   gap: 6px;
   border-radius: 4px;
   overflow: visible;
@@ -253,14 +262,14 @@ body {
 
 @media (min-width: 768px) {
   .accordion-strip {
-    height: 520px;
+    height: 640px;
     gap: 8px;
   }
 }
 
 @media (min-width: 1024px) {
   .accordion-strip {
-    height: 560px;
+    height: 720px;
   }
 }
 
@@ -269,61 +278,76 @@ body {
   position: relative;
   min-width: 0;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 8px;
   align-self: center;
+  background-color: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1;
   transition:
     flex 0.7s cubic-bezier(0.72, 0, 0.28, 1),
-    transform 0.7s cubic-bezier(0.72, 0, 0.28, 1);
+    transform 0.7s cubic-bezier(0.72, 0, 0.28, 1),
+    border-color 0.5s ease;
 }
 
-/* Overlay gradient — bottom-up for legibility */
-.accordion-card__overlay {
+/* Ivory + color blobs overlay — same as service cards */
+.accordion-card::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.1) 40%,
-    transparent 100%
-  );
-  pointer-events: none;
-  z-index: 1;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255, 200, 50, 0.55) 0%, transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(60, 120, 255, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(230, 50, 50, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 75% 65%, rgba(255, 220, 80, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 20% 70%, rgba(80, 140, 255, 0.3) 0%, transparent 45%);
+  background-color: #f5f0e8;
+  background-size: 200% 200%;
+  animation: blob-drift 8s ease infinite;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* ─── Collapsed state — vertical title ─── */
+.accordion-card--active {
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.accordion-card--active::before {
+  opacity: 1;
+}
+
+/* ─── Default state — big label ─── */
 .accordion-card__collapsed {
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  padding: 1rem;
   opacity: 1;
-  transition: opacity 0.5s cubic-bezier(0.72, 0, 0.28, 1);
+  transition:
+    opacity 0.5s cubic-bezier(0.72, 0, 0.28, 1),
+    transform 0.5s cubic-bezier(0.72, 0, 0.28, 1);
 }
 
 .accordion-card--active .accordion-card__collapsed {
   opacity: 0;
+  transform: translateY(-16px);
   pointer-events: none;
 }
 
-.accordion-card__number {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.accordion-card__vertical-title {
+.accordion-card__big-label {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
 }
 
@@ -357,18 +381,17 @@ body {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.08);
+  color: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.06);
   padding: 0.35rem 0.75rem;
   border-radius: 100px;
-  backdrop-filter: blur(4px);
 }
 
 .accordion-card__idx {
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(0, 0, 0, 0.25);
 }
 
 .accordion-card__bottom {
@@ -382,13 +405,13 @@ body {
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  color: var(--color-white);
+  color: #111;
 }
 
 .accordion-card__line {
   width: 40px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), transparent);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), transparent);
   border-radius: 1px;
   transition: width 0.5s ease;
 }
@@ -397,26 +420,45 @@ body {
   width: 60px;
 }
 
-/* ─── Mobile: horizontal scroll, same design ─── */
+/* ─── Mobile: horizontal bars, expand on tap ─── */
 @media (max-width: 768px) {
   .accordion-strip {
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    padding-bottom: 1rem;
-    /* hide scrollbar but keep scrolling */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .accordion-strip::-webkit-scrollbar {
-    display: none;
+    flex-direction: column;
+    height: auto;
+    gap: 6px;
+    padding: 12px 0;
+    overflow: visible;
   }
 
   .accordion-card {
-    min-width: 60px;
-    scroll-snap-align: start;
+    width: 100% !important;
+    height: 72px !important;
+    flex: none !important;
+    transform: none !important;
+    align-self: stretch;
+    transition: height 0.6s cubic-bezier(0.72, 0, 0.28, 1);
+  }
+
+  .accordion-card--active {
+    height: 300px !important;
+  }
+
+  .accordion-card__collapsed {
+    padding: 0 1.25rem;
+  }
+
+  .accordion-card__big-label {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    font-size: 1.1rem;
+  }
+
+  .accordion-card__expanded {
+    padding: 1.25rem;
+  }
+
+  .accordion-card__title {
+    font-size: 1.25rem;
   }
 }
 

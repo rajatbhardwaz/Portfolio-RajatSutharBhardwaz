@@ -142,6 +142,8 @@ export default function Services() {
         </motion.span>
       </div>
 
+      <p className="card-section__hint">Click or hover on these cards</p>
+
       {/* Grid */}
       <motion.div
         variants={gridContainer}
