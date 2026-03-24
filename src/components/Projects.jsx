@@ -103,6 +103,7 @@ export default function Projects() {
               }}
               onMouseEnter={() => setHoveredId(project.id)}
               onMouseLeave={() => setHoveredId(null)}
+              onClick={() => setHoveredId(hoveredId === project.id ? null : project.id)}
               data-cursor-hover
             >
               {/* Collapsed state — vertical title */}

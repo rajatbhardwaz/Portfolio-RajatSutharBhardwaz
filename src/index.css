@@ -402,16 +402,22 @@ body {
   .accordion-strip {
     flex-direction: column;
     height: auto;
+    gap: 6px;
+    padding: 12px 0;
+    overflow: hidden;
   }
 
   .accordion-card {
-    height: 80px;
+    width: 100% !important;
+    height: 72px !important;
     flex: none !important;
+    transform: none !important;
+    align-self: stretch;
     transition: height 0.6s cubic-bezier(0.72, 0, 0.28, 1);
   }
 
   .accordion-card--active {
-    height: 320px;
+    height: 280px !important;
   }
 
   .accordion-card__collapsed {
@@ -423,6 +429,14 @@ body {
   .accordion-card__vertical-title {
     writing-mode: horizontal-tb;
     text-orientation: initial;
+  }
+
+  .accordion-card__expanded {
+    padding: 1.25rem;
+  }
+
+  .accordion-card__title {
+    font-size: 1.25rem;
   }
 }
 
