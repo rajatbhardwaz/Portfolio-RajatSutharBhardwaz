@@ -397,46 +397,26 @@ body {
   width: 60px;
 }
 
-/* ─── Mobile: stack vertically instead ─── */
-@media (max-width: 639px) {
+/* ─── Mobile: horizontal scroll, same design ─── */
+@media (max-width: 768px) {
   .accordion-strip {
-    flex-direction: column;
-    height: auto;
-    gap: 6px;
-    padding: 12px 0;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 1rem;
+    /* hide scrollbar but keep scrolling */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .accordion-strip::-webkit-scrollbar {
+    display: none;
   }
 
   .accordion-card {
-    width: 100% !important;
-    height: 72px !important;
-    flex: none !important;
-    transform: none !important;
-    align-self: stretch;
-    transition: height 0.6s cubic-bezier(0.72, 0, 0.28, 1);
-  }
-
-  .accordion-card--active {
-    height: 280px !important;
-  }
-
-  .accordion-card__collapsed {
-    flex-direction: row;
-    gap: 1rem;
-    padding: 0 1.25rem;
-  }
-
-  .accordion-card__vertical-title {
-    writing-mode: horizontal-tb;
-    text-orientation: initial;
-  }
-
-  .accordion-card__expanded {
-    padding: 1.25rem;
-  }
-
-  .accordion-card__title {
-    font-size: 1.25rem;
+    min-width: 60px;
+    scroll-snap-align: start;
   }
 }
 
