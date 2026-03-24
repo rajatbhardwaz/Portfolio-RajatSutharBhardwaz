@@ -7,36 +7,42 @@ const revealEase = [0.16, 1, 0.3, 1];
 const services = [
   {
     number: "01",
+    label: "Web\nDesign",
     title: "Website Design",
     description:
       "Custom-built websites that convert visitors into customers. Clean, fast, and mobile-first.",
   },
   {
     number: "02",
+    label: "Booking\nSystems",
     title: "Booking Systems",
     description:
       "Online appointment and booking solutions. Automate scheduling and reduce no-shows.",
   },
   {
     number: "03",
+    label: "UI/UX",
     title: "UI/UX Design",
     description:
       "Intuitive interfaces designed for clarity. Every pixel serves a purpose.",
   },
   {
     number: "04",
+    label: "App\nDev",
     title: "App Development",
     description:
       "Cross-platform applications built for performance and seamless user experience.",
   },
   {
     number: "05",
+    label: "3D &\nMotion",
     title: "3D & Motion",
     description:
       "Immersive 3D visuals and motion design that bring digital experiences to life.",
   },
   {
     number: "06",
+    label: "Creative\nDev",
     title: "Creative Development",
     description:
       "Experimental and interactive builds that push the boundaries of the web.",
@@ -65,14 +71,24 @@ function ServiceCard({ service }) {
       className="service-card"
       data-cursor-hover
     >
-      {/* Number */}
-      <span className="service-card__number">{service.number}</span>
+      {/* Default state: big label that fills the card */}
+      <div className="service-card__default">
+        <span className="service-card__big-label">
+          {service.label.split("\n").map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < service.label.split("\n").length - 1 && <br />}
+            </span>
+          ))}
+        </span>
+      </div>
 
-      {/* Title */}
-      <h3 className="service-card__title">{service.title}</h3>
-
-      {/* Description */}
-      <p className="service-card__desc">{service.description}</p>
+      {/* Hover state: full details */}
+      <div className="service-card__hover">
+        <span className="service-card__number">{service.number}</span>
+        <h3 className="service-card__title">{service.title}</h3>
+        <p className="service-card__desc">{service.description}</p>
+      </div>
     </motion.div>
   );
 }
