@@ -12,11 +12,8 @@ const nameVariants = [
   { text: "Rajat Suthar Bhardwaj", lang: "EN" },
   { text: "रजत सुथार भारद्वाज", lang: "HI" },
   { text: "Раджат Сутхар Бхардвадж", lang: "RU" },
-  { text: "Rajat Suthar Bhardwaj", lang: "ES" },
-  { text: "Rajat Suthar Bhardwaj", lang: "FR" },
   { text: "拉贾特·苏塔尔·巴德瓦杰", lang: "ZH" },
   { text: "ラジャット・スタール・バードワジ", lang: "JA" },
-  { text: "रजत सुथार भारद्वाज", lang: "MR" },
   { text: "ரஜத் சுதார் பார்த்வாஜ்", lang: "TA" },
   { text: "રજત સુથાર ભારદ્વાજ", lang: "GU" },
 ];
