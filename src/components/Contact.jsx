@@ -39,9 +39,9 @@ const contactDetails = [
 ];
 
 const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "GitHub", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/beingrajattastic?igsh=OGNseGhreHpkMTYz" },
+  { label: "Pinterest", href: "https://pin.it/2F05mWywy" },
+  { label: "GitHub", href: "https://github.com/rajatbhardwaz" },
 ];
 
 export default function Contact() {
