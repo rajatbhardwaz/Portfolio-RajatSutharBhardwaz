@@ -1,0 +1,10 @@
+{
+  "name": "rajat-suthar-bhardwaz-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A dependency-free personal portfolio site.",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/check.mjs"
+  }
+}
