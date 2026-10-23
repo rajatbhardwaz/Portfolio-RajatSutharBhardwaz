@@ -43,50 +43,824 @@ a { color: inherit; }
 
 main, section, article, .board-stage, .play-panel, .work-card, .card-copy, .contact-main, .site-footer, .footer-contact-list { min-width: 0; }
 
+/* ==========================================================================
+   MAXIMALIST POSTER SPLASH SCREEN (Poster House Block Party Style)
+   ========================================================================== */
+
 .splash-screen {
   position: fixed;
-  z-index: 1000;
+  z-index: 99999;
   inset: 0;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100svh;
-  padding: clamp(1.1rem, 3.2vw, 3rem);
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  isolation: isolate;
-  background: var(--acid);
-  color: var(--ink);
-  opacity: 0;
+  background: #0d0d0f;
+  background-image:
+    radial-gradient(circle at 50% 30%, rgba(255, 69, 0, 0.18) 0%, transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0px, rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0px, rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 24px);
+  color: #161616;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease 0.25s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.splash-screen.is-leaving {
+  transform: translateY(-100%);
+  opacity: 0.98;
   pointer-events: none;
-  transform: translateY(-1.5%);
-  visibility: hidden;
-  transition: opacity .3s ease, transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s linear .3s;
 }
-.splash-screen::before {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: repeating-linear-gradient(90deg, transparent 0 7.8vw, rgba(22,22,22,.15) 7.8vw calc(7.8vw + 1px));
-  content: "";
+
+/* Splash Topbar & Controls */
+.splash-topbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem clamp(0.75rem, 2.5vw, 1.5rem);
+  background: #FFE500;
+  border-bottom: 3.5px solid #000;
+  z-index: 10;
 }
-.splash-screen.is-active { opacity: 1; pointer-events: auto; transform: none; visibility: visible; transition-delay: 0s; }
-.splash-screen.is-leaving { opacity: 0; pointer-events: none; transform: translateY(-3%); }
-.splash-meta, .splash-note { position: relative; z-index: 3; display: flex; justify-content: space-between; gap: 1rem; font-size: clamp(.57rem, 1vw, .75rem); font-weight: 900; letter-spacing: .1em; line-height: 1.2; text-transform: uppercase; }
-.splash-meta { align-items: flex-start; padding-bottom: .7rem; border-bottom: 2px solid var(--ink); }
-.splash-title { position: relative; z-index: 2; align-self: center; max-width: 100%; font-family: var(--display); font-size: clamp(4.35rem, 14.2vw, 15rem); font-weight: 900; letter-spacing: -.1em; line-height: .68; text-transform: uppercase; }
-.splash-title span { display: block; opacity: 0; transform: translateX(-16%) skewX(-9deg); }
-.splash-screen.is-active .splash-title span { animation: splash-word-in .48s cubic-bezier(.1,.9,.2,1) both; }
-.splash-screen.is-active .splash-title span:nth-child(2) { animation-delay: .11s; color: var(--hot-pink); }
-.splash-screen.is-active .splash-title span:nth-child(3) { animation-delay: .22s; color: var(--electric-blue); }
-.splash-block { position: absolute; z-index: 1; display: block; opacity: 0; }
-.splash-block-blue { right: 8%; bottom: 10%; width: clamp(8.5rem, 27vw, 25rem); aspect-ratio: 1; border: .45rem solid var(--ink); background: var(--electric-blue); transform: rotate(20deg) scale(.55); }
-.splash-block-pink { top: 21%; right: 17%; width: clamp(5.5rem, 16vw, 15rem); aspect-ratio: 1; border-radius: 50%; background: var(--hot-pink); transform: rotate(-18deg) scale(.55); }
-.splash-block-sun { bottom: 7%; left: 5%; width: clamp(3.6rem, 9vw, 8rem); aspect-ratio: 1; background: var(--sun); clip-path: polygon(50% 0%, 60% 31%, 91% 9%, 69% 40%, 100% 50%, 69% 60%, 91% 91%, 60% 69%, 50% 100%, 40% 69%, 9% 91%, 31% 60%, 0% 50%, 31% 40%, 9% 9%, 40% 31%); transform: rotate(-24deg) scale(.55); }
-.splash-screen.is-active .splash-block { animation: splash-block-in .7s cubic-bezier(.1,.9,.2,1) both; }
-.splash-screen.is-active .splash-block-pink { animation-delay: .16s; }
-.splash-screen.is-active .splash-block-sun { animation-delay: .3s; }
-.splash-note { align-items: flex-end; padding-top: .7rem; border-top: 2px solid var(--ink); }
-@keyframes splash-word-in { to { opacity: 1; transform: none; } }
-@keyframes splash-block-in { to { opacity: 1; transform: rotate(0deg) scale(1); } }
+
+.splash-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: clamp(0.62rem, 1.1vw, 0.75rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.splash-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #FF0033;
+  box-shadow: 0 0 0 0 rgba(255, 0, 51, 0.7);
+  animation: pulse-ring 1.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 51, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(255, 0, 51, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 51, 0); }
+}
+
+.splash-timer-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--sans);
+  font-weight: 900;
+}
+
+.splash-timer-tag {
+  font-size: clamp(0.55rem, 0.9vw, 0.7rem);
+  letter-spacing: 0.08em;
+  color: #000;
+}
+
+.splash-timer-digit {
+  font-family: var(--display), monospace;
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+  font-weight: 900;
+  color: #0047FF;
+  min-width: 2.8rem;
+  text-align: right;
+}
+
+.splash-progress-track {
+  width: clamp(60px, 12vw, 120px);
+  height: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1.5px solid #000;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.splash-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #0047FF;
+  border-radius: 999px;
+  transition: width 0.05s linear;
+}
+
+.splash-skip-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: #000;
+  color: #FFE500;
+  border: 2px solid #000;
+  font-family: var(--sans);
+  font-size: clamp(0.62rem, 1vw, 0.75rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.splash-skip-action:hover {
+  background: #0047FF;
+  color: #FFF;
+  transform: translateY(-1px) scale(1.02);
+}
+
+.splash-skip-arrow {
+  font-size: 0.9em;
+  transition: transform 0.15s ease;
+}
+
+.splash-skip-action:hover .splash-skip-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Poster Canvas Frame */
+.splash-canvas-wrapper {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.4rem, 1.4vh, 1.1rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.splash-poster {
+  width: 100%;
+  max-width: min(92vw, 540px);
+  height: 100%;
+  max-height: min(86vh, 810px);
+  aspect-ratio: 1 / 1.46;
+  background: #FF5200;
+  border: 3.5px solid #000;
+  box-shadow: 8px 8px 0px #000, 0 20px 50px rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, 2fr)
+    minmax(0, 0.42fr)
+    minmax(0, 1.4fr)
+    minmax(0, 1.4fr)
+    minmax(0, 0.46fr)
+    minmax(0, 1.25fr)
+    minmax(0, 1.2fr)
+    minmax(0, 0.42fr);
+  overflow: hidden;
+  margin: auto;
+}
+
+/* Universal Poster Tile Rules */
+.poster-tile {
+  position: relative;
+  border: 1.75px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+
+.poster-svg {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+/* -------------------------------------------------------------
+   ROW 1: Top Micro Tiles
+   ------------------------------------------------------------- */
+.tile-lamp {
+  grid-column: span 2;
+  background: #00D4FF;
+}
+
+.tile-hotdog {
+  grid-column: span 2;
+  background: #0047FF;
+}
+
+.hotdog-svg {
+  width: 90%;
+  height: auto;
+}
+
+.tile-checkers-green {
+  grid-column: span 2;
+  background-color: #FFF;
+  background-image:
+    linear-gradient(45deg, #00C853 25%, transparent 25%),
+    linear-gradient(-45deg, #00C853 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #00C853 75%),
+    linear-gradient(-45deg, transparent 75%, #00C853 75%);
+  background-size: 14px 14px;
+  background-position: 0 0, 0 7px, 7px -7px, -7px 0px;
+}
+
+.tile-stripes-blue {
+  grid-column: span 2;
+  background: repeating-linear-gradient(
+    -45deg,
+    #0047FF,
+    #0047FF 6px,
+    #FFFFFF 6px,
+    #FFFFFF 12px
+  );
+}
+
+.tile-star {
+  grid-column: span 2;
+  background: #FF728E;
+}
+
+.star-svg {
+  width: 70%;
+  height: 70%;
+  filter: drop-shadow(1px 1px 0px #000);
+}
+
+.tile-eye {
+  grid-column: span 2;
+  background: #0047FF;
+}
+
+.eye-graphic {
+  width: 82%;
+  height: 64%;
+  background: #FFF;
+  border: 2.5px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.eye-iris {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #00D4FF;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: eye-glance 3.2s ease-in-out infinite;
+}
+
+.eye-pupil-heart {
+  font-size: 14px;
+  color: #000;
+  line-height: 1;
+}
+
+@keyframes eye-glance {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-4px, 0); }
+  75% { transform: translate(4px, 0); }
+}
+
+/* -------------------------------------------------------------
+   ROW 2: RAJAT SUTHAR Hero Headline & Companions
+   ------------------------------------------------------------- */
+.tile-dog {
+  grid-column: span 3;
+  background: #00D4FF;
+}
+
+.dog-svg {
+  width: 88%;
+  height: auto;
+}
+
+.tile-hero-rajat {
+  grid-column: span 6;
+  background: #0047FF;
+}
+
+.rajat-poster-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display), Impact, "Arial Black", sans-serif;
+  font-size: clamp(1.8rem, 4.4vw, 3.4rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: #FFE500;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  transform: scaleY(1.08);
+  padding: 0.2rem;
+}
+
+.tile-music-group {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.mini-tile {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-music-note {
+  background: #00C853;
+  border-bottom: 1.5px solid #000;
+}
+
+.music-svg {
+  width: 68%;
+  height: 68%;
+}
+
+.mini-tile-row {
+  flex: 1;
+  width: 100%;
+  display: flex;
+}
+
+.tile-flower {
+  background: #FFE500;
+  border-right: 1.5px solid #000;
+}
+
+.flower-icon {
+  font-size: 1.1rem;
+  color: #FF0055;
+}
+
+.tile-pizza {
+  background: #FF5200;
+}
+
+.pizza-icon {
+  font-size: 1rem;
+}
+
+.tile-bird {
+  grid-column: span 1;
+  background: #00D4FF;
+}
+
+.bird-svg {
+  width: 90%;
+  height: auto;
+}
+
+/* -------------------------------------------------------------
+   ROW 3: Ribbon Sub
+   ------------------------------------------------------------- */
+.tile-ribbon-sub {
+  grid-column: 1 / -1;
+  background: #FFE500;
+  border-top: 2.5px solid #000;
+  border-bottom: 2.5px solid #000;
+  padding: 0 0.5rem;
+}
+
+.ribbon-text {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(0.52rem, 1vw, 0.72rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #0047FF;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------
+   ROW 4 & 5: 3D Extruded Centerpiece + Glasses, Sun, Rock, Umbrella
+   ------------------------------------------------------------- */
+.tile-glasses {
+  grid-column: 1 / span 3;
+  grid-row: 4;
+  background: #0047FF;
+}
+
+.glasses-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.heart-lens {
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  color: #FF728E;
+  -webkit-text-stroke: 2.5px #FFE500;
+  filter: drop-shadow(2px 2px 0px #000);
+}
+
+.glasses-bridge {
+  width: 8px;
+  height: 4px;
+  background: #FFE500;
+  border: 1.5px solid #000;
+  margin-top: -4px;
+}
+
+.tile-sun {
+  grid-column: 1 / span 3;
+  grid-row: 5;
+  background: #00D4FF;
+}
+
+.sun-svg.spin-slow {
+  width: 74%;
+  height: 74%;
+  animation: spin-sun 18s linear infinite;
+}
+
+@keyframes spin-sun {
+  to { transform: rotate(360deg); }
+}
+
+/* Center 3D Isometric Extrusion (BHARDWAZ) */
+.tile-bhardwaz-3d {
+  grid-column: 4 / span 6;
+  grid-row: 4 / span 2;
+  background: #FF4500;
+  background-image:
+    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  padding: 0.3rem 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bhardwaz-block-wrap {
+  text-align: center;
+  transform: skewY(-2.5deg) rotate(-1deg);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bhardwaz-extruded {
+  font-family: var(--display), Impact, "Arial Black", sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.55rem);
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -0.02em;
+  color: #FF9FB5;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow:
+    -1px 1px 0 #D02B00,
+    -2px 2px 0 #D02B00,
+    -3px 3px 0 #D02B00,
+    -4px 4px 0 #D02B00,
+    -5px 5px 0 #B82400,
+    -6px 6px 0 #B82400,
+    -7px 7px 0 #B82400,
+    -8px 8px 0 #981A00,
+    -9px 9px 0 #981A00,
+    -10px 10px 0 #7A1200,
+    -11px 11px 0 #7A1200,
+    -12px 12px 0 #000;
+}
+
+.bhardwaz-sub-extruded {
+  font-family: var(--display), Impact, "Arial Black", sans-serif;
+  font-size: clamp(1.25rem, 2.7vw, 2.15rem);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: 0em;
+  color: #FF9FB5;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  text-shadow:
+    -1px 1px 0 #D02B00,
+    -2px 2px 0 #D02B00,
+    -3px 3px 0 #D02B00,
+    -4px 4px 0 #D02B00,
+    -5px 5px 0 #B82400,
+    -6px 6px 0 #B82400,
+    -7px 7px 0 #B82400,
+    -8px 8px 0 #981A00,
+    -9px 9px 0 #981A00,
+    -10px 10px 0 #7A1200,
+    -11px 11px 0 #7A1200,
+    -12px 12px 0 #000;
+}
+
+.tile-rockhand {
+  grid-column: 10 / span 3;
+  grid-row: 4;
+  background: #FF5200;
+}
+
+.rock-hand-icon {
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  filter: drop-shadow(2px 2px 0px #000);
+  transform: rotate(-10deg);
+}
+
+.tile-umbrella {
+  grid-column: 10 / span 3;
+  grid-row: 5;
+  background: #00C853;
+}
+
+.pinwheel {
+  width: clamp(40px, 8vw, 56px);
+  height: clamp(40px, 8vw, 56px);
+  border-radius: 50%;
+  border: 2.5px solid #000;
+  background: conic-gradient(
+    #FF5200 0deg 45deg,
+    #FFFFFF 45deg 90deg,
+    #FF728E 90deg 135deg,
+    #FFE500 135deg 180deg,
+    #0047FF 180deg 225deg,
+    #00C853 225deg 270deg,
+    #00D4FF 270deg 315deg,
+    #FFE500 315deg 360deg
+  );
+  box-shadow: 2px 2px 0 #000;
+  animation: spin-pinwheel 6s linear infinite;
+}
+
+@keyframes spin-pinwheel {
+  to { transform: rotate(360deg); }
+}
+
+/* -------------------------------------------------------------
+   ROW 6: Big Yellow Banner
+   ------------------------------------------------------------- */
+.tile-ribbon-gold {
+  grid-column: 1 / -1;
+  grid-row: 6;
+  background: #FFE500;
+  border-top: 2.5px solid #000;
+  border-bottom: 2.5px solid #000;
+  padding: 0 0.5rem;
+}
+
+.ribbon-headline {
+  margin: 0;
+  font-family: var(--display), Impact, sans-serif;
+  font-size: clamp(0.72rem, 1.5vw, 1.05rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: #0047FF;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------
+   ROW 7: Chimney, Polka, Cup, Gymnast, Tree
+   ------------------------------------------------------------- */
+.tile-chimney {
+  grid-column: span 2;
+  background: #00D4FF;
+}
+
+.chimney-svg {
+  width: 78%;
+  height: auto;
+}
+
+.puff-1 { animation: smoke-float 1.8s ease-in-out infinite alternate; }
+.puff-2 { animation: smoke-float 1.8s ease-in-out 0.6s infinite alternate; }
+
+@keyframes smoke-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}
+
+.tile-dots-yellow {
+  grid-column: span 2;
+  background-color: #FF728E;
+  background-image: radial-gradient(#FFE500 28%, transparent 29%);
+  background-size: 11px 11px;
+}
+
+.tile-cup {
+  grid-column: span 2;
+  background: #FF5200;
+}
+
+.cup-svg {
+  width: 76%;
+  height: auto;
+  filter: drop-shadow(1px 1px 0 #000);
+}
+
+.tile-gymnast {
+  grid-column: span 4;
+  background: #0047FF;
+}
+
+.gymnast-svg {
+  width: 90%;
+  height: auto;
+}
+
+.tile-tree {
+  grid-column: span 2;
+  background: #FF5200;
+}
+
+.tree-svg {
+  width: 74%;
+  height: auto;
+}
+
+/* -------------------------------------------------------------
+   ROW 8: Live Badge, Transit, Smiley, Taxi
+   ------------------------------------------------------------- */
+.tile-live-badge {
+  grid-column: span 4;
+  background: #0047FF;
+  padding: 0.25rem 0.4rem;
+}
+
+.badge-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.badge-line {
+  font-family: var(--sans);
+  font-size: clamp(0.48rem, 0.85vw, 0.65rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #FFE500;
+  text-transform: uppercase;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.tile-transit {
+  grid-column: span 2;
+  background: #FF5200;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.transit-heart {
+  font-size: 1rem;
+  color: #FF0055;
+  filter: drop-shadow(1px 1px 0 #000);
+}
+
+.subway-dots {
+  display: flex;
+  gap: 2px;
+}
+
+.s-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FFE500;
+  color: #000;
+  font-size: 7px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+}
+
+.tile-smiley {
+  grid-column: span 2;
+  background: #FFE500;
+}
+
+.sparkle-smiley {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sparkle-eyes {
+  display: flex;
+  gap: 4px;
+}
+
+.sparkle-eye {
+  font-size: 1rem;
+  color: #000;
+  line-height: 1;
+}
+
+.smiley-smile {
+  width: 18px;
+  height: 9px;
+  border: 2.5px solid #000;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  margin-top: 1px;
+}
+
+.tile-taxi {
+  grid-column: span 4;
+  background: #FF728E;
+  padding: 0.2rem;
+}
+
+.taxi-svg {
+  width: 90%;
+  height: auto;
+  filter: drop-shadow(2px 2px 0px #000);
+  animation: taxi-bounce 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes taxi-bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2px); }
+}
+
+/* -------------------------------------------------------------
+   ROW 9: Sponsor Bar & QR
+   ------------------------------------------------------------- */
+.tile-sponsor-bar {
+  grid-column: span 10;
+  background: #FF5200;
+  padding: 0.15rem 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sponsor-logos {
+  display: flex;
+  gap: 0.8rem;
+  font-family: var(--sans);
+  font-size: clamp(0.48rem, 0.8vw, 0.62rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #000;
+  animation: marquee-sponsor 15s linear infinite;
+}
+
+@keyframes marquee-sponsor {
+  from { transform: translateX(0); }
+  to { transform: translateX(-40%); }
+}
+
+.tile-footer-qr {
+  grid-column: span 2;
+  background: #FFE500;
+  padding: 2px;
+}
+
+.qr-svg {
+  width: 82%;
+  height: 82%;
+}
+
+/* Reduce Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .splash-pulse,
+  .eye-iris,
+  .sun-svg.spin-slow,
+  .pinwheel,
+  .puff-1,
+  .puff-2,
+  .taxi-svg,
+  .sponsor-logos {
+    animation: none !important;
+  }
+  .splash-screen {
+    transition: opacity 0.3s ease !important;
+  }
+  .splash-screen.is-leaving {
+    transform: none !important;
+    opacity: 0 !important;
+  }
+}
 
 .sr-only {
   position: absolute;

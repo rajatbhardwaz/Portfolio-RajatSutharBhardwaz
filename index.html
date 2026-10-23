@@ -15,16 +15,310 @@
     <meta property="og:description" content="Software engineer with a designer's eye and a problem-solver's mindset." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="styles.css?v=4" />
   </head>
   <body>
-    <div class="splash-screen" data-splash aria-hidden="true" inert>
-      <div class="splash-meta"><span>RAJAT SUTHAR BHARDWAZ</span><span>01 / 01</span></div>
-      <div class="splash-title" aria-hidden="true"><span>THINK</span><span>MAKE</span><span>MOVE</span></div>
-      <span class="splash-block splash-block-blue" aria-hidden="true"></span>
-      <span class="splash-block splash-block-pink" aria-hidden="true"></span>
-      <span class="splash-block splash-block-sun" aria-hidden="true"></span>
-      <p class="splash-note">DESIGN × ENGINEERING × PROBLEM-SOLVING</p>
+    <div class="splash-screen" id="splash-screen" role="dialog" aria-modal="true" aria-label="Welcome poster">
+      <header class="splash-topbar">
+        <div class="splash-badge">
+          <span class="splash-pulse" aria-hidden="true"></span>
+          <span class="splash-badge-text">MAXIMALIST POSTER // RAJAT SUTHAR BHARDWAZ</span>
+        </div>
+        <div class="splash-timer-cluster">
+          <span class="splash-timer-tag">ENTERING IN</span>
+          <span class="splash-timer-digit" id="splash-timer-count">3.0s</span>
+          <div class="splash-progress-track" aria-hidden="true">
+            <div class="splash-progress-fill" id="splash-progress-fill"></div>
+          </div>
+        </div>
+        <button type="button" class="splash-skip-action" id="splash-skip" aria-label="Skip intro splash screen">
+          <span>ENTER SITE</span>
+          <span class="splash-skip-arrow" aria-hidden="true">↗</span>
+        </button>
+      </header>
+
+      <div class="splash-canvas-wrapper">
+        <div class="splash-poster" aria-label="Block Party inspired maximalist poster for Rajat Suthar Bhardwaz">
+          <!-- Row 1: Top Modules -->
+          <div class="poster-tile tile-lamp" aria-hidden="true">
+            <svg viewBox="0 0 80 80" class="poster-svg">
+              <path d="M14 34 A26 26 0 0 1 66 34 Z" fill="#00C853" stroke="#000" stroke-width="3" />
+              <rect x="12" y="32" width="56" height="5" fill="#000" rx="2" />
+              <path d="M22 37 L27 46 L53 46 L58 37 Z" fill="#FFFFFF" stroke="#000" stroke-width="2" />
+              <rect x="36" y="46" width="8" height="24" fill="#00C853" stroke="#000" stroke-width="2.5" />
+              <line x1="24" y1="70" x2="56" y2="70" stroke="#000" stroke-width="5" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-hotdog" aria-hidden="true">
+            <svg viewBox="0 0 96 36" class="hotdog-svg">
+              <rect x="2" y="3" width="92" height="30" rx="15" fill="#FF5200" stroke="#000" stroke-width="2.5" />
+              <path d="M12 18 Q20 10 28 18 T44 18 T60 18 T76 18 T84 18" fill="none" stroke="#FFE500" stroke-width="3.5" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-checkers-green" aria-hidden="true"></div>
+
+          <div class="poster-tile tile-stripes-blue" aria-hidden="true"></div>
+
+          <div class="poster-tile tile-star" aria-hidden="true">
+            <svg viewBox="0 0 60 60" class="star-svg">
+              <polygon points="30,4 37,22 56,23 41,35 46,54 30,42 14,54 19,35 4,23 23,22" fill="#FFE500" stroke="#000" stroke-width="2.5" stroke-linejoin="round" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-eye" aria-hidden="true">
+            <div class="eye-graphic">
+              <div class="eye-sclera">
+                <div class="eye-iris">
+                  <span class="eye-pupil-heart">♥</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Headline Block RAJAT SUTHAR + Dog Mascot + Music + Bird -->
+          <div class="poster-tile tile-dog" aria-hidden="true">
+            <svg viewBox="0 0 90 70" class="dog-svg">
+              <circle cx="28" cy="24" r="16" fill="#FFE500" stroke="#000" stroke-width="3" />
+              <ellipse cx="18" cy="24" rx="6" ry="12" fill="#FFE500" stroke="#000" stroke-width="2.5" />
+              <circle cx="28" cy="20" r="3" fill="#000" />
+              <circle cx="16" cy="26" r="3" fill="#000" />
+              <rect x="26" y="28" width="46" height="24" rx="6" fill="#FFE500" stroke="#000" stroke-width="3" />
+              <rect x="32" y="48" width="8" height="18" fill="#FFE500" stroke="#000" stroke-width="3" rx="4" />
+              <rect x="44" y="48" width="8" height="18" fill="#FFE500" stroke="#000" stroke-width="3" rx="4" />
+              <rect x="58" y="48" width="8" height="18" fill="#FFE500" stroke="#000" stroke-width="3" rx="4" />
+              <path d="M72 32 Q82 24 84 14" stroke="#FFE500" stroke-width="6" fill="none" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-hero-rajat">
+            <div class="rajat-poster-title">
+              <span>RAJAT</span>
+              <span>SUTHAR</span>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-music-group">
+            <div class="mini-tile tile-music-note" aria-hidden="true">
+              <svg viewBox="0 0 50 50" class="music-svg">
+                <path d="M14 36 A6 6 0 1 1 20 30 L20 12 L38 8 L38 28 A6 6 0 1 1 44 22 L44 4 L14 8 Z" fill="#FFE500" stroke="#000" stroke-width="2.5" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="mini-tile-row">
+              <div class="mini-tile tile-flower" aria-hidden="true">
+                <span class="flower-icon">✿</span>
+              </div>
+              <div class="mini-tile tile-pizza" aria-hidden="true">
+                <span class="pizza-icon">🍕</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-bird" aria-hidden="true">
+            <svg viewBox="0 0 60 70" class="bird-svg">
+              <circle cx="28" cy="28" r="16" fill="#0055FF" stroke="#000" stroke-width="2.5" />
+              <circle cx="24" cy="24" r="5" fill="#FFE500" />
+              <circle cx="24" cy="24" r="2.5" fill="#000" />
+              <polygon points="12,28 4,24 12,20" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <path d="M28 44 C28 54, 46 54, 46 44 C46 34, 28 34, 28 44 Z" fill="#0055FF" stroke="#000" stroke-width="2.5" />
+              <line x1="32" y1="52" x2="32" y2="66" stroke="#FF728E" stroke-width="3" stroke-linecap="round" />
+              <line x1="32" y1="66" x2="26" y2="66" stroke="#FF728E" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <!-- Credential Ribbon 1 -->
+          <div class="poster-tile tile-ribbon-sub">
+            <p class="ribbon-text">CREATIVE ENGINEER × DESIGN TECHNOLOGIST × DELHI &amp; WORLDWIDE</p>
+          </div>
+
+          <!-- Row 3: Heart Glasses + 3D Extruded BHARDWAZ + Rock Hand -->
+          <div class="poster-tile tile-glasses" aria-hidden="true">
+            <div class="glasses-graphic">
+              <span class="heart-lens left-lens">♥</span>
+              <span class="glasses-bridge"></span>
+              <span class="heart-lens right-lens">♥</span>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-bhardwaz-3d">
+            <div class="bhardwaz-block-wrap">
+              <div class="bhardwaz-extruded">BHARDWAZ</div>
+              <div class="bhardwaz-sub-extruded">PORTFOLIO</div>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-rockhand" aria-hidden="true">
+            <div class="rock-hand-icon">🤘</div>
+          </div>
+
+          <!-- Sun + Umbrella row -->
+          <div class="poster-tile tile-sun" aria-hidden="true">
+            <svg viewBox="0 0 80 80" class="sun-svg spin-slow">
+              <circle cx="40" cy="40" r="18" fill="#FFE500" stroke="#000" stroke-width="3" />
+              <polygon points="40,4 35,16 45,16" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="40,76 35,64 45,64" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="4,40 16,35 16,45" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="76,40 64,35 64,45" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="14,14 26,18 20,28" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="66,66 54,62 60,52" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="66,14 54,18 60,28" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <polygon points="14,66 26,62 20,52" fill="#FFE500" stroke="#000" stroke-width="2" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-umbrella" aria-hidden="true">
+            <div class="pinwheel spin-pinwheel">
+              <span class="pw-slice pw-1"></span>
+              <span class="pw-slice pw-2"></span>
+              <span class="pw-slice pw-3"></span>
+              <span class="pw-slice pw-4"></span>
+              <span class="pw-slice pw-5"></span>
+              <span class="pw-slice pw-6"></span>
+              <span class="pw-slice pw-7"></span>
+              <span class="pw-slice pw-8"></span>
+            </div>
+          </div>
+
+          <!-- Credential Ribbon 2: Big Yellow Banner -->
+          <div class="poster-tile tile-ribbon-gold">
+            <p class="ribbon-headline">FULL-STACK CODE • DESIGN SYSTEMS • 2025–2026</p>
+          </div>
+
+          <!-- Row 4: Chimney, Polka Dots, Coffee Cup, Gymnast, Tree -->
+          <div class="poster-tile tile-chimney" aria-hidden="true">
+            <svg viewBox="0 0 60 80" class="chimney-svg">
+              <rect x="18" y="32" width="24" height="48" fill="#FF5200" stroke="#000" stroke-width="3" />
+              <rect x="18" y="44" width="24" height="8" fill="#FFF" stroke="#000" stroke-width="2" />
+              <rect x="18" y="60" width="24" height="8" fill="#FFF" stroke="#000" stroke-width="2" />
+              <rect x="14" y="28" width="32" height="6" fill="#000" rx="2" />
+              <circle cx="30" cy="18" r="6" fill="#FFF" stroke="#000" stroke-width="2" class="puff-1" />
+              <circle cx="36" cy="8" r="4" fill="#FFF" stroke="#000" stroke-width="2" class="puff-2" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-dots-yellow" aria-hidden="true"></div>
+
+          <div class="poster-tile tile-cup" aria-hidden="true">
+            <svg viewBox="0 0 70 80" class="cup-svg">
+              <polygon points="12,18 58,18 50,74 20,74" fill="#FFF" stroke="#000" stroke-width="3" />
+              <rect x="10" y="12" width="50" height="7" rx="3" fill="#0055FF" stroke="#000" stroke-width="2" />
+              <rect x="18" y="30" width="34" height="26" fill="#0055FF" />
+              <text x="35" y="46" font-size="7" font-weight="900" fill="#FFE500" text-anchor="middle" font-family="sans-serif">RAJAT</text>
+              <text x="35" y="53" font-size="6" font-weight="700" fill="#FFF" text-anchor="middle" font-family="sans-serif">DEV</text>
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-gymnast" aria-hidden="true">
+            <svg viewBox="0 0 90 90" class="gymnast-svg">
+              <circle cx="15" cy="15" r="4" fill="#FF5200" />
+              <circle cx="45" cy="15" r="4" fill="#FF5200" />
+              <circle cx="75" cy="15" r="4" fill="#FF5200" />
+              <circle cx="15" cy="45" r="4" fill="#FF5200" />
+              <circle cx="75" cy="45" r="4" fill="#FF5200" />
+              <circle cx="15" cy="75" r="4" fill="#FF5200" />
+              <circle cx="45" cy="75" r="4" fill="#FF5200" />
+              <circle cx="75" cy="75" r="4" fill="#FF5200" />
+              <circle cx="45" cy="72" r="9" fill="#FFE500" stroke="#000" stroke-width="2.5" />
+              <rect x="36" y="46" width="18" height="20" rx="3" fill="#FFF" stroke="#000" stroke-width="2.5" />
+              <line x1="36" y1="56" x2="24" y2="76" stroke="#FF728E" stroke-width="4.5" stroke-linecap="round" />
+              <line x1="54" y1="56" x2="66" y2="76" stroke="#FF728E" stroke-width="4.5" stroke-linecap="round" />
+              <line x1="40" y1="46" x2="22" y2="24" stroke="#00D4FF" stroke-width="6" stroke-linecap="round" />
+              <line x1="50" y1="46" x2="68" y2="24" stroke="#00D4FF" stroke-width="6" stroke-linecap="round" />
+              <rect x="14" y="16" width="14" height="9" rx="3" fill="#FFE500" stroke="#000" stroke-width="2" />
+              <rect x="62" y="16" width="14" height="9" rx="3" fill="#FFE500" stroke="#000" stroke-width="2" />
+            </svg>
+          </div>
+
+          <div class="poster-tile tile-tree" aria-hidden="true">
+            <svg viewBox="0 0 60 70" class="tree-svg">
+              <rect x="26" y="48" width="8" height="18" fill="#FF5200" stroke="#000" stroke-width="2" />
+              <circle cx="30" cy="36" r="16" fill="#00C853" />
+              <circle cx="20" cy="40" r="12" fill="#00C853" />
+              <circle cx="40" cy="40" r="12" fill="#00C853" />
+              <circle cx="30" cy="22" r="13" fill="#00C853" />
+            </svg>
+          </div>
+
+          <!-- Row 5: Live specs badge, subway badge, smiley, taxi -->
+          <div class="poster-tile tile-live-badge">
+            <div class="badge-content">
+              <span class="badge-line">FULL-STACK DEV</span>
+              <span class="badge-line">DESIGN SYSTEMS</span>
+              <span class="badge-line">CREATIVE CODE</span>
+              <span class="badge-line">INTERACTION UX</span>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-transit" aria-hidden="true">
+            <div class="transit-heart">♥</div>
+            <div class="subway-dots">
+              <span class="s-dot s-n">R</span>
+              <span class="s-dot s-q">S</span>
+              <span class="s-dot s-r">B</span>
+              <span class="s-dot s-w">W</span>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-smiley" aria-hidden="true">
+            <div class="sparkle-smiley">
+              <div class="sparkle-eyes">
+                <span class="sparkle-eye">✦</span>
+                <span class="sparkle-eye">✦</span>
+              </div>
+              <span class="smiley-smile"></span>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-taxi" aria-hidden="true">
+            <svg viewBox="0 0 110 50" class="taxi-svg">
+              <rect x="6" y="20" width="98" height="20" rx="5" fill="#FFE500" stroke="#000" stroke-width="2.5" />
+              <polygon points="26,20 38,8 72,8 84,20" fill="#FFE500" stroke="#000" stroke-width="2.5" />
+              <polygon points="30,18 40,11 50,11 50,18" fill="#00D4FF" stroke="#000" stroke-width="1.5" />
+              <polygon points="54,18 54,11 68,11 76,18" fill="#00D4FF" stroke="#000" stroke-width="1.5" />
+              <rect x="10" y="24" width="90" height="4" fill="#000" />
+              <rect x="46" y="3" width="18" height="6" rx="2" fill="#FFF" stroke="#000" stroke-width="1.5" />
+              <text x="55" y="7.5" font-size="4" font-weight="900" fill="#000" text-anchor="middle" font-family="sans-serif">TAXI</text>
+              <circle cx="26" cy="40" r="8" fill="#000" />
+              <circle cx="26" cy="40" r="3" fill="#FFF" />
+              <circle cx="82" cy="40" r="8" fill="#000" />
+              <circle cx="82" cy="40" r="3" fill="#FFF" />
+            </svg>
+          </div>
+
+          <!-- Bottom Tech Ribbon & QR Bar -->
+          <div class="poster-tile tile-sponsor-bar">
+            <div class="sponsor-logos">
+              <span>★ TYPESCRIPT</span>
+              <span>★ REACT</span>
+              <span>★ NODE.JS</span>
+              <span>★ CSS ART</span>
+              <span>★ WEBGL</span>
+              <span>★ UI/UX DESIGN</span>
+              <span>★ ACCESSIBILITY</span>
+            </div>
+          </div>
+
+          <div class="poster-tile tile-footer-qr" aria-hidden="true">
+            <svg viewBox="0 0 40 40" class="qr-svg">
+              <rect x="0" y="0" width="40" height="40" fill="#FFE500" />
+              <rect x="4" y="4" width="12" height="12" fill="#000" />
+              <rect x="6" y="6" width="8" height="8" fill="#FFE500" />
+              <rect x="8" y="8" width="4" height="4" fill="#000" />
+              <rect x="24" y="4" width="12" height="12" fill="#000" />
+              <rect x="26" y="6" width="8" height="8" fill="#FFE500" />
+              <rect x="28" y="8" width="4" height="4" fill="#000" />
+              <rect x="4" y="24" width="12" height="12" fill="#000" />
+              <rect x="6" y="26" width="8" height="8" fill="#FFE500" />
+              <rect x="8" y="28" width="4" height="4" fill="#000" />
+              <rect x="20" y="20" width="4" height="4" fill="#000" />
+              <rect x="28" y="24" width="4" height="8" fill="#000" />
+              <rect x="24" y="32" width="8" height="4" fill="#000" />
+              <rect x="34" y="20" width="2" height="12" fill="#000" />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
     <noscript><style>.splash-screen { display: none !important; }</style></noscript>
     <a class="skip-link" href="#main">Skip to content</a>
