@@ -301,23 +301,19 @@
   }
 
   // =========================================================================
-  // Splash Screen Lifecycle Controller (Minimum 3.0s guarantee)
+  // Full-Screen Animated Splash Screen (Clean 3.0s Experience)
   // =========================================================================
   const initSplash = () => {
     const splash = $("#splash-screen");
     if (!splash) return;
 
-    const timerCount = $("#splash-timer-count");
-    const progressFill = $("#splash-progress-fill");
-    const skipBtn = $("#splash-skip");
     const brandLink = $(".brand-name");
 
     // Lock page scroll while splash screen is displaying
     document.body.style.overflow = "hidden";
 
-    // Guarantee minimum 3.2 seconds display time (satisfies "at least 3 seconds")
-    const DURATION_MS = 3200;
-    const startTime = performance.now();
+    // Runs for exactly 3.0 seconds as requested
+    const DURATION_MS = 3000;
     let isFinished = false;
 
     const finishSplash = () => {
@@ -332,42 +328,21 @@
         splash.setAttribute("aria-hidden", "true");
         splash.setAttribute("inert", "");
         brandLink?.focus();
-      }, 650);
+      }, 680);
     };
 
-    const updateTimer = (currentTime) => {
-      if (isFinished) return;
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / DURATION_MS, 1);
-      const remainingSeconds = Math.max(0, (DURATION_MS - elapsed) / 1000);
+    // Auto-advance after 3.0 seconds
+    const timerId = setTimeout(finishSplash, DURATION_MS);
 
-      if (progressFill) {
-        progressFill.style.width = `${(progress * 100).toFixed(1)}%`;
-      }
-
-      if (timerCount) {
-        if (remainingSeconds > 0.05) {
-          timerCount.textContent = `${remainingSeconds.toFixed(1)}s`;
-        } else {
-          timerCount.textContent = "READY!";
-        }
-      }
-
-      if (progress >= 1) {
-        finishSplash();
-      } else {
-        requestAnimationFrame(updateTimer);
-      }
-    };
-
-    requestAnimationFrame(updateTimer);
-
-    if (skipBtn) {
-      skipBtn.addEventListener("click", () => finishSplash());
-    }
+    // Click anywhere on splash screen or press Escape to skip immediately
+    splash.addEventListener("click", () => {
+      clearTimeout(timerId);
+      finishSplash();
+    });
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !isFinished) {
+      if ((e.key === "Escape" || e.key === " ") && !isFinished) {
+        clearTimeout(timerId);
         finishSplash();
       }
     });
