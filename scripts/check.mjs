@@ -1,4 +1,4 @@
-import { readFile, stat } from "node:fs/promises";
+import { readFile, stat, mkdir, copyFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const requiredFiles = ["index.html", "styles.css", "script.js"];
@@ -29,5 +29,20 @@ if (!ids.has("home") || ids.has("top")) throw new Error("Top controls must targe
 if (!html.includes("data-scroll-top") || !js.includes("window.scrollTo")) throw new Error("Functional top controls are required.");
 if (!js.includes("CONTACT_DETAILS") || !html.includes("footer-contact-list")) throw new Error("Footer contact configuration is required.");
 if (!js.includes("noopener noreferrer")) throw new Error("External contact links need safe rel attributes.");
+
+// Mirror static files to dist/ for compatibility with any dashboard output settings
+try {
+  await mkdir(resolve("dist"), { recursive: true });
+  const filesToDist = ["index.html", "styles.css", "script.js", "favicon.svg", "favicon.ico"];
+  for (const f of filesToDist) {
+    try {
+      await copyFile(resolve(f), resolve("dist", f));
+    } catch {
+      // Optional file skipped if absent
+    }
+  }
+} catch (distErr) {
+  console.warn("Dist sync notice:", distErr.message);
+}
 
 console.log("Portfolio source checks passed.");

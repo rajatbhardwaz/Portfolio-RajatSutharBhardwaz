@@ -68,7 +68,7 @@
       link.href = href;
       link.textContent = method.type === "phone" || method.type === "email"
         ? `${method.label}: ${value}`
-        : method.type === "whatsapp" ? "WhatsApp: Direct message ↗" : "Threads ↗";
+        : method.type === "whatsapp" ? "WhatsApp: Direct message ↗" : `${method.label} ↗`;
       if (method.type === "external" || method.type === "whatsapp") {
         link.target = "_blank";
         link.rel = "noopener noreferrer";
@@ -261,6 +261,7 @@
       tagElement.textContent = tag;
       return tagElement;
     }));
+    document.body.style.overflow = "hidden";
     if (typeof dialog.showModal === "function") dialog.showModal();
     else {
       dialog.setAttribute("open", "");
@@ -271,6 +272,7 @@
     card.addEventListener("click", () => openCard(card));
   });
   const closePracticeDialog = () => {
+    document.body.style.overflow = "";
     if (typeof dialog.close === "function") dialog.close();
     else {
       dialog.removeAttribute("open");
@@ -281,7 +283,10 @@
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) closePracticeDialog();
   });
-  dialog.addEventListener("close", () => opener?.focus());
+  dialog.addEventListener("close", () => {
+    document.body.style.overflow = "";
+    opener?.focus();
+  });
 
   if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
     $$('[data-tilt]').forEach((element) => {
