@@ -30,19 +30,22 @@ if (!html.includes("data-scroll-top") || !js.includes("window.scrollTo")) throw 
 if (!js.includes("CONTACT_DETAILS") || !html.includes("footer-contact-list")) throw new Error("Footer contact configuration is required.");
 if (!js.includes("noopener noreferrer")) throw new Error("External contact links need safe rel attributes.");
 
-// Mirror static files to dist/ for compatibility with any dashboard output settings
+// Mirror static files to public/ and dist/ for complete Vercel and hosting compatibility
 try {
-  await mkdir(resolve("dist"), { recursive: true });
+  const targetDirs = ["public", "dist"];
   const filesToDist = ["index.html", "styles.css", "script.js", "favicon.svg", "favicon.ico"];
-  for (const f of filesToDist) {
-    try {
-      await copyFile(resolve(f), resolve("dist", f));
-    } catch {
-      // Optional file skipped if absent
+  for (const dir of targetDirs) {
+    await mkdir(resolve(dir), { recursive: true });
+    for (const f of filesToDist) {
+      try {
+        await copyFile(resolve(f), resolve(dir, f));
+      } catch {
+        // Optional file skipped if absent
+      }
     }
   }
 } catch (distErr) {
-  console.warn("Dist sync notice:", distErr.message);
+  console.warn("Build sync notice:", distErr.message);
 }
 
 console.log("Portfolio source checks passed.");
