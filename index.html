@@ -126,6 +126,7 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#approach">Approach</a>
         <a href="#work">Practice</a>
+        <a href="#showcase">Showcase</a>
         <a href="#playground">Playground</a>
         <a href="#about">About</a>
         <a class="nav-contact" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
@@ -148,7 +149,7 @@
         </div>
 
         <aside class="hero-side-note reveal" aria-label="Professional perspective">
-          <span>01 / 07</span>
+          <span>01 / 08</span>
           <p>Designer’s eye<br />Engineer’s mind<br />Problem-solver’s thinking</p>
         </aside>
 
@@ -283,9 +284,383 @@
         </div>
       </section>
 
+      <section class="showcase-section" id="showcase" aria-labelledby="showcase-title">
+        <div class="showcase-header section-pad reveal">
+          <div class="showcase-header-left">
+            <p class="section-number">04 / CURATED SHOWCASE</p>
+            <h2 id="showcase-title">UIs, Designs<br /><em>&amp; Live Projects.</em></h2>
+          </div>
+          <div class="showcase-header-right">
+            <p class="showcase-desc">
+              A kinetic 3D stage featuring interactive design systems, browser-native synthesizers, generative CAD models, and high-throughput distributed pipelines.
+            </p>
+            <div class="showcase-filters" role="group" aria-label="Filter showcase projects">
+              <button type="button" class="filter-pill is-active" data-filter="all">All Projects <span class="filter-count">(6)</span></button>
+              <button type="button" class="filter-pill" data-filter="ui">UIs &amp; Apps <span class="filter-count">(2)</span></button>
+              <button type="button" class="filter-pill" data-filter="3d">3D &amp; CAD <span class="filter-count">(1)</span></button>
+              <button type="button" class="filter-pill" data-filter="design">Visual Systems <span class="filter-count">(1)</span></button>
+              <button type="button" class="filter-pill" data-filter="engineering">Engineering <span class="filter-count">(1)</span></button>
+              <button type="button" class="filter-pill" data-filter="experiments">Experiments <span class="filter-count">(1)</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-track" id="showcase-track">
+          <div class="showcase-stage-sticky">
+            <!-- Curved Trajectory Ambient Guide Line -->
+            <div class="showcase-orbit-track" aria-hidden="true">
+              <svg class="curve-svg" viewBox="0 0 1000 240" preserveAspectRatio="none">
+                <path d="M 0,220 Q 500,20 1000,220" class="curve-path-bg" />
+                <path d="M 0,220 Q 500,20 1000,220" class="curve-path-active" id="showcase-path-active" />
+              </svg>
+              <div class="orbit-focal-glow"></div>
+            </div>
+
+            <!-- Active HUD & Navigation Bar -->
+            <div class="showcase-hud">
+              <div class="hud-meta">
+                <span class="hud-step-badge" id="showcase-current-idx">01 / 06</span>
+                <span class="hud-category-label" id="showcase-current-cat">UI &amp; DESIGN SYSTEM</span>
+              </div>
+              <div class="hud-controls">
+                <button type="button" class="hud-btn hud-prev" id="showcase-prev" aria-label="Previous showcase project">
+                  <span aria-hidden="true">←</span> PREV
+                </button>
+                <div class="hud-progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6" aria-label="Showcase carousel progress">
+                  <div class="hud-progress-fill" id="showcase-progress-fill"></div>
+                </div>
+                <button type="button" class="hud-btn hud-next" id="showcase-next" aria-label="Next showcase project">
+                  NEXT <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3D Parabolic Curved Stage -->
+            <div class="showcase-3d-scene" id="showcase-scene" tabindex="0" role="region" aria-label="Interactive 3D project gallery. Use arrow keys or scroll to explore.">
+              <div class="showcase-cards-container" id="showcase-cards">
+
+                <!-- Card 01: NovaOS -->
+                <article class="sc-card sc-card-novaos" data-project="novaos" data-category="ui" data-index="0" tabindex="0" aria-label="NovaOS Design System project">
+                  <div class="sc-topline">
+                    <span class="sc-index">01</span>
+                    <span class="sc-category">UI &amp; DESIGN SYSTEM</span>
+                    <span class="sc-badge-live">● LIVE ARCHITECTURE</span>
+                  </div>
+                  <div class="sc-preview sc-preview-novaos">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+                      <span class="chrome-title">nova.design-tokens // theme-sync.ts</span>
+                      <span class="chrome-ping">SYNC 100%</span>
+                    </div>
+                    <div class="novaos-dashboard">
+                      <div class="nova-stat-row">
+                        <div class="nova-stat-tile">
+                          <small>PROPAGATION</small>
+                          <strong>12ms</strong>
+                          <span class="trend-up">↑ 42% faster</span>
+                        </div>
+                        <div class="nova-stat-tile">
+                          <small>ACCESSIBILITY</small>
+                          <strong>WCAG AAA</strong>
+                          <span class="trend-ok">✓ 100% PASS</span>
+                        </div>
+                        <div class="nova-stat-tile">
+                          <small>CORE BUNDLE</small>
+                          <strong>8.4 KB</strong>
+                          <span class="trend-ok">TREE-SHAKEN</span>
+                        </div>
+                      </div>
+                      <div class="nova-palette-preview">
+                        <span class="palette-label">THEME MATRIX:</span>
+                        <div class="palette-chips">
+                          <button type="button" class="chip chip-acid is-active" data-theme-color="acid" aria-label="Select Acid Lime theme"></button>
+                          <button type="button" class="chip chip-pink" data-theme-color="pink" aria-label="Select Hot Pink theme"></button>
+                          <button type="button" class="chip chip-blue" data-theme-color="blue" aria-label="Select Electric Blue theme"></button>
+                        </div>
+                        <div class="nova-toggle-wrap">
+                          <span class="toggle-txt">Fluid Units</span>
+                          <span class="mini-toggle is-on"><i></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-info">
+                    <div class="sc-text">
+                      <h3>NovaOS Kinetic Design System</h3>
+                      <p>Multi-tenant component architecture and AST token compiler syncing Figma styles to code in real time.</p>
+                    </div>
+                    <div class="sc-tags">
+                      <span>React</span><span>TypeScript</span><span>Tokens</span><span>Tailwind</span>
+                    </div>
+                    <div class="sc-actions">
+                      <button type="button" class="sc-btn sc-btn-inspect" data-inspect="novaos">Inspect Project Specs <span aria-hidden="true">↗</span></button>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 02: Aura Soundworks -->
+                <article class="sc-card sc-card-aura" data-project="aura" data-category="ui" data-index="1" tabindex="0" aria-label="Aura Spatial Audio Synthesizer project">
+                  <div class="sc-topline">
+                    <span class="sc-index">02</span>
+                    <span class="sc-category">CREATIVE AUDIO INTERFACE</span>
+                    <span class="sc-badge-live">● 96kHz DSP</span>
+                  </div>
+                  <div class="sc-preview sc-preview-aura">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+                      <span class="chrome-title">aura.synth // polyphonic-worklet.wasm</span>
+                      <span class="chrome-ping">0.2ms JITTER</span>
+                    </div>
+                    <div class="aura-studio">
+                      <div class="aura-spectrum" id="aura-spectrum" aria-hidden="true">
+                        <span class="spec-bar b1"></span><span class="spec-bar b2"></span><span class="spec-bar b3"></span>
+                        <span class="spec-bar b4"></span><span class="spec-bar b5"></span><span class="spec-bar b6"></span>
+                        <span class="spec-bar b7"></span><span class="spec-bar b8"></span><span class="spec-bar b9"></span>
+                        <span class="spec-bar b10"></span><span class="spec-bar b11"></span><span class="spec-bar b12"></span>
+                      </div>
+                      <div class="aura-controls">
+                        <div class="rotary-knob-unit">
+                          <div class="rotary-dial dial-cutoff"><span class="knob-pointer"></span></div>
+                          <span class="knob-label">CUTOFF 2.8k</span>
+                        </div>
+                        <div class="rotary-knob-unit">
+                          <div class="rotary-dial dial-res"><span class="knob-pointer"></span></div>
+                          <span class="knob-label">RESONANCE</span>
+                        </div>
+                        <button type="button" class="aura-pulse-btn" id="aura-pulse-trigger" aria-label="Trigger audio spectrum test pulse">
+                          <span class="pulse-icon">▶</span> PULSE WAVE
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-info">
+                    <div class="sc-text">
+                      <h3>Aura Spatial Audio Synthesizer</h3>
+                      <p>Browser-native additive synthesizer with frequency visualizers and zero-dropout AudioWorklet threading.</p>
+                    </div>
+                    <div class="sc-tags">
+                      <span>Web Audio API</span><span>Canvas 2D</span><span>DSP</span><span>Interactive</span>
+                    </div>
+                    <div class="sc-actions">
+                      <button type="button" class="sc-btn sc-btn-inspect" data-inspect="aura">Inspect Project Specs <span aria-hidden="true">↗</span></button>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 03: HyperForm CAD -->
+                <article class="sc-card sc-card-hyperform" data-project="hyperform" data-category="3d" data-index="2" tabindex="0" aria-label="HyperForm 3D CAD project">
+                  <div class="sc-topline">
+                    <span class="sc-index">03</span>
+                    <span class="sc-category">3D &amp; MECHANICAL CAD</span>
+                    <span class="sc-badge-live">● SOLIDWORKS</span>
+                  </div>
+                  <div class="sc-preview sc-preview-hyperform">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+                      <span class="chrome-title">assembly_04_rev2.step // WebGL Viewport</span>
+                      <span class="chrome-ping">48.2k POLYS</span>
+                    </div>
+                    <div class="hyperform-stage">
+                      <div class="cad-grid-bg" aria-hidden="true"></div>
+                      <div class="cad-wireframe-assembly" id="cad-mesh-preview">
+                        <div class="cad-cube">
+                          <span class="cube-face face-front"></span>
+                          <span class="cube-face face-back"></span>
+                          <span class="cube-face face-left"></span>
+                          <span class="cube-face face-right"></span>
+                          <span class="cube-face face-top"></span>
+                          <span class="cube-face face-bottom"></span>
+                        </div>
+                        <div class="cad-axes" aria-hidden="true">
+                          <span class="axis-x">X</span><span class="axis-y">Y</span><span class="axis-z">Z</span>
+                        </div>
+                      </div>
+                      <div class="cad-measurements">
+                        <span class="datum-tag tag-dia">Ø 42.50mm</span>
+                        <span class="datum-tag tag-tol">TOL ±0.015</span>
+                        <button type="button" class="cad-mode-btn" id="cad-mode-toggle">WIREFRAME / SOLID</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-info">
+                    <div class="sc-text">
+                      <h3>HyperForm Parametric 3D CAD</h3>
+                      <p>Topology reduction pipeline transforming heavy SolidWorks assemblies into real-time WebGL models.</p>
+                    </div>
+                    <div class="sc-tags">
+                      <span>SolidWorks</span><span>AutoCAD</span><span>Three.js</span><span>WebGL</span>
+                    </div>
+                    <div class="sc-actions">
+                      <button type="button" class="sc-btn sc-btn-inspect" data-inspect="hyperform">Inspect Project Specs <span aria-hidden="true">↗</span></button>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 04: TypoSignal Identity -->
+                <article class="sc-card sc-card-typosignal" data-project="typosignal" data-category="design" data-index="3" tabindex="0" aria-label="TypoSignal Brand Identity project">
+                  <div class="sc-topline">
+                    <span class="sc-index">04</span>
+                    <span class="sc-category">VISUAL &amp; BRAND DIRECTION</span>
+                    <span class="sc-badge-live">● EDITORIAL SYSTEM</span>
+                  </div>
+                  <div class="sc-preview sc-preview-typosignal">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+                      <span class="chrome-title">typosignal_guidelines_2025.pdf // Spec 01</span>
+                      <span class="chrome-ping">GRID 12-COL</span>
+                    </div>
+                    <div class="typosignal-poster">
+                      <div class="hazard-stripes" aria-hidden="true"></div>
+                      <div class="poster-core">
+                        <div class="poster-headline" id="poster-headline">
+                          <span>FORM</span>
+                          <span class="accent-amp">&amp;</span>
+                          <span>SIGNAL</span>
+                        </div>
+                        <p class="poster-sub">KINETIC VARIABLE TYPOGRAPHY</p>
+                      </div>
+                      <div class="poster-footer-strip">
+                        <label class="tracking-slider-wrap">
+                          <span>TRACKING:</span>
+                          <input type="range" min="0" max="18" value="4" id="typo-tracking-slider" aria-label="Adjust typographic tracking" />
+                        </label>
+                        <span class="registration-cross">✛</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-info">
+                    <div class="sc-text">
+                      <h3>TypoSignal Kinetic Identity</h3>
+                      <p>High-impact typographic design system, generative poster series, and tactile editorial brand guidelines.</p>
+                    </div>
+                    <div class="sc-tags">
+                      <span>Typography</span><span>Editorial Grid</span><span>Art Direction</span><span>Brand</span>
+                    </div>
+                    <div class="sc-actions">
+                      <button type="button" class="sc-btn sc-btn-inspect" data-inspect="typosignal">Inspect Project Specs <span aria-hidden="true">↗</span></button>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 05: Veloce Stream -->
+                <article class="sc-card sc-card-veloce" data-project="veloce" data-category="engineering" data-index="4" tabindex="0" aria-label="Veloce Stream pipeline project">
+                  <div class="sc-topline">
+                    <span class="sc-index">05</span>
+                    <span class="sc-category">SYSTEMS ARCHITECTURE</span>
+                    <span class="sc-badge-live">● 1.4M OPS / SEC</span>
+                  </div>
+                  <div class="sc-preview sc-preview-veloce">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+                      <span class="chrome-title">cluster-stream.service // partition-ring-4</span>
+                      <span class="chrome-ping">P99: 1.8ms</span>
+                    </div>
+                    <div class="veloce-pipeline">
+                      <div class="pipeline-flow">
+                        <div class="pipe-node node-edge">
+                          <span class="node-icon">⚡</span>
+                          <small>INGEST</small>
+                        </div>
+                        <div class="pipe-connector">
+                          <span class="packet-dot dot-1"></span>
+                          <span class="packet-dot dot-2"></span>
+                        </div>
+                        <div class="pipe-node node-bus">
+                          <span class="node-icon">☵</span>
+                          <small>KAFKA</small>
+                        </div>
+                        <div class="pipe-connector">
+                          <span class="packet-dot dot-3"></span>
+                        </div>
+                        <div class="pipe-node node-worker">
+                          <span class="node-icon">⚙</span>
+                          <small>WORKERS</small>
+                        </div>
+                        <div class="pipe-connector">
+                          <span class="packet-dot dot-4"></span>
+                        </div>
+                        <div class="pipe-node node-store">
+                          <span class="node-icon">⬢</span>
+                          <small>VECTOR</small>
+                        </div>
+                      </div>
+                      <div class="pipeline-actions">
+                        <div class="throughput-ticker">
+                          <span class="ticker-pulse"></span>
+                          <span class="ticker-val" id="veloce-ticker">1,420,890 evt/s</span>
+                        </div>
+                        <button type="button" class="burst-btn" id="veloce-burst-btn">SIMULATE BURST ↗</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-info">
+                    <div class="sc-text">
+                      <h3>Veloce Distributed Event Pipeline</h3>
+                      <p>High-concurrency streaming architecture with backpressure-aware queues and sub-2ms tail latency.</p>
+                    </div>
+                    <div class="sc-tags">
+                      <span>Node.js</span><span>Go</span><span>Redis</span><span>Distributed</span><span>Queues</span>
+                    </div>
+                    <div class="sc-actions">
+                      <button type="button" class="sc-btn sc-btn-inspect" data-inspect="veloce">Inspect Project Specs <span aria-hidden="true">↗</span></button>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Card 06: Chronos Lab -->
+                <article class="sc-card sc-card-chronos" data-project="chronos" data-category="experiments" data-index="5" tabindex="0" aria-label="Chronos Shader Lab project">
+                  <div class="sc-topline">
+                    <span class="sc-index">06</span>
+                    <span class="sc-category">CREATIVE CODE &amp; EXPERIMENTS</span>
+                    <span class="sc-badge-live">● 60 FPS GLSL</span>
+                  </div>
+                  <div class="sc-preview sc-preview-chronos">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+                      <span class="chrome-title">raymarch_plasma.frag // Shader Canvas</span>
+                      <span class="chrome-ping">4K BUFFER</span>
+                    </div>
+                    <div class="chronos-fluid-canvas">
+                      <div class="fluid-orb" id="fluid-orb" aria-hidden="true">
+                        <div class="orb-layer-1"></div>
+                        <div class="orb-layer-2"></div>
+                        <div class="orb-layer-3"></div>
+                      </div>
+                      <div class="chronos-mode-bar">
+                        <button type="button" class="orb-mode-btn is-active" data-orb-mode="warp">Fluid Warp</button>
+                        <button type="button" class="orb-mode-btn" data-orb-mode="prism">Prism Refract</button>
+                        <button type="button" class="orb-mode-btn" data-orb-mode="vortex">Vortex</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-info">
+                    <div class="sc-text">
+                      <h3>Chronos Kinetic Shader Lab</h3>
+                      <p>Procedural GLSL raymarching, mathematical fluid dynamics, and tactile physics micro-interactions.</p>
+                    </div>
+                    <div class="sc-tags">
+                      <span>Creative Code</span><span>GLSL</span><span>Physics</span><span>Interaction</span>
+                    </div>
+                    <div class="sc-actions">
+                      <button type="button" class="sc-btn sc-btn-inspect" data-inspect="chronos">Inspect Project Specs <span aria-hidden="true">↗</span></button>
+                    </div>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+
+            <!-- Footer Trajectory Hint -->
+            <div class="showcase-footer-hint">
+              <span class="hint-text"><span class="hint-bullet">●</span> Scroll down to glide along curve · Drag or use ← / → to navigate</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="case-lens section-pad" aria-labelledby="lens-title">
         <div class="lens-sticky reveal">
-          <p class="section-number">04 / THE CASE-STUDY LENS</p>
+          <p class="section-number">05 / THE CASE-STUDY LENS</p>
           <h2 id="lens-title">A polished outcome<br />is only <em>half the story.</em></h2>
           <p>
             When work is ready to be published, the useful evidence is not just its final
@@ -303,7 +678,7 @@
 
       <section class="playground section-pad" id="playground" aria-labelledby="playground-title">
         <div class="playground-header reveal">
-          <p class="section-number">05 / THE PLAYGROUND</p>
+          <p class="section-number">06 / THE PLAYGROUND</p>
           <h2 id="playground-title">Curiosity needs<br /><em>somewhere to go.</em></h2>
           <p>
             A working library of perspectives: sharp interfaces, visual language, spatial
@@ -351,7 +726,7 @@
       <section class="about section-pad" id="about" aria-labelledby="about-title">
         <div class="about-name reveal" aria-hidden="true">Rajat Suthar Bhardwaz</div>
         <div class="about-copy reveal">
-          <p class="section-number">06 / ABOUT</p>
+          <p class="section-number">07 / ABOUT</p>
           <h2 id="about-title">I work where systems<br />meet <em>human attention.</em></h2>
           <p>
             I’m Rajat Suthar Bhardwaz, a software engineer who moves comfortably between
@@ -369,9 +744,8 @@
       </section>
 
       <section class="contact section-pad" id="contact" aria-labelledby="contact-title">
-        <div class="contact-orbit" aria-hidden="true"><span>LET’S MAKE THE NEXT THING COUNT · </span></div>
         <div class="contact-main reveal">
-          <p class="section-number">07 / CONTACT</p>
+          <p class="section-number">08 / CONTACT</p>
           <h2 id="contact-title">Let’s make something<br /><em>clear and capable.</em></h2>
           <p>
             I’m interested in the problems where thoughtful design and practical engineering
@@ -402,6 +776,44 @@
       <p class="dialog-summary" id="dialog-summary"></p>
       <div class="dialog-list" id="dialog-list"></div>
       <p class="dialog-note">This is an overview of practice, not a claim about a published client project.</p>
+    </dialog>
+
+    <dialog class="showcase-dialog" id="showcase-dialog" aria-labelledby="sc-dialog-title">
+      <button class="dialog-close sc-dialog-close" type="button" aria-label="Close project details">×</button>
+      <div class="sc-dialog-header">
+        <p class="section-number" id="sc-dialog-num">01 / SHOWCASE DOSSIER</p>
+        <span class="sc-dialog-category" id="sc-dialog-cat">UI &amp; DESIGN SYSTEM</span>
+      </div>
+      <h2 id="sc-dialog-title">NovaOS Kinetic Design System</h2>
+      <p class="sc-dialog-lead" id="sc-dialog-lead"></p>
+      
+      <div class="sc-dialog-grid">
+        <div class="sc-dialog-col">
+          <h3>The Engineering Architecture</h3>
+          <p id="sc-dialog-eng"></p>
+          <div class="sc-metric-box">
+            <span class="metric-label" id="sc-dialog-m1-label">Latency</span>
+            <strong class="metric-value" id="sc-dialog-m1-val">12ms</strong>
+          </div>
+        </div>
+        <div class="sc-dialog-col">
+          <h3>Design &amp; Interaction Systems</h3>
+          <p id="sc-dialog-des"></p>
+          <div class="sc-metric-box">
+            <span class="metric-label" id="sc-dialog-m2-label">Compliance</span>
+            <strong class="metric-value" id="sc-dialog-m2-val">WCAG AAA</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-dialog-tech">
+        <span class="tech-title">TECHNOLOGY STACK:</span>
+        <div class="sc-dialog-tags" id="sc-dialog-tags"></div>
+      </div>
+
+      <div class="sc-dialog-footer">
+        <button type="button" class="button button-accent sc-dialog-dismiss">Close Dossier <span aria-hidden="true">↵</span></button>
+      </div>
     </dialog>
 
     <script src="script.js?v=3"></script>
